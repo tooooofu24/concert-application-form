@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -21,9 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
-    <main>
-        <div id="app">
+<body class="h-100">
+    <main class="h-100">
+        <div id="app" class="h-100">
             @yield('content')
         </div>
     </main>
@@ -32,8 +32,6 @@
     <!-- JavaScript -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- 郵便番号のライブラリ -->
-    <script src="https://yubinbango.github.io/yubinbango-core/yubinbango-core.js" charset="UTF-8" defer></script>
 </body>
 
 </html>

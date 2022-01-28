@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-header">申込フォーム</div>
         <div class="card-body">
-            <form action="" @submit.prevent="submit()">
+            <form action="/application" method="POST">
+                <input type="hidden" name="_token" :value="csrf" />
                 <div class="row">
                     <div class="p-1 col-sm-6">
                         <label for="name" class="form-label m-0">氏名</label>
@@ -22,7 +23,7 @@
                                         'is-valid': name_error === '',
                                     },
                                 ]"
-                                placeholder="例：千葉太郎"
+                                placeholder="例：佐藤太郎"
                                 id="name"
                                 name="name"
                                 required
@@ -82,7 +83,7 @@
                                         'is-valid': tel_error === '',
                                     },
                                 ]"
-                                placeholder="例：090-1234-5678"
+                                placeholder="例：012-3456-7890"
                                 id="tel"
                                 name="tel"
                                 required
@@ -151,20 +152,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center pt-3 pb-2">
-                        <button
-                            class="btn btn-sm btn-primary"
-                            v-if="is_validated"
-                        >
-                            申し込む
-                        </button>
-                        <button
-                            class="btn btn-sm btn-secondary"
-                            disabled
-                            v-else
-                        >
-                            申し込む
-                        </button>
+                    <div class="text-center pt-3 pb-1">
+                        <button class="btn btn-sm btn-primary">申し込む</button>
                     </div>
                 </div>
             </form>
@@ -187,6 +176,10 @@ export default {
             tel_error: null,
             zip_error: null,
             address_error: null,
+            // csrfトークン
+            csrf: document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
         };
     },
     watch: {
@@ -198,9 +191,8 @@ export default {
             var reg = /^[0-9]{3}-[0-9]{4}$/;
             if (reg.test(this.zip)) {
                 this.zip_error = "";
-                var _this = this;
-                new YubinBango.Core(zip, function (addr) {
-                    _this.address = addr.region + addr.locality + addr.street; // 市区町村
+                axios.get("/api/get-address?zip=" + this.zip).then((res) => {
+                    this.address = res.data;
                 });
             }
         },
@@ -220,15 +212,7 @@ export default {
             var reg =
                 /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/;
             if (reg.test(this.email)) {
-                axios
-                    .post("/api/check-email", { email: this.email })
-                    .then((res) => {
-                        if (res.data) {
-                            this.email_error = "既に登録済のメールアドレスです";
-                        } else {
-                            this.email_error = "";
-                        }
-                    });
+                this.email_error = "";
             } else {
                 this.email_error = "メールアドレスを正しく入力してください";
             }
@@ -257,20 +241,6 @@ export default {
                 this.address_error = "住所は必須です";
             }
         },
-        submit() {
-            axios
-                .post("/api/tickets", {
-                    name: this.name,
-                    email: this.email,
-                    tel: this.tel,
-                    zip: this.zip,
-                    address: this.address,
-                })
-                .then((res) => {
-                    console.log(res);
-                    window.location.href = "/application?is_created=true";
-                });
-        },
     },
     computed: {
         is_validated() {
@@ -287,6 +257,25 @@ export default {
                 !this.address_error
             );
         },
+    },
+    props: { errors: Object, old: Object },
+    mounted: function () {
+        if (!Array.isArray(this.errors)) {
+            this.name_error = this.errors.name ? this.errors.name[0] : "";
+            this.email_error = this.errors.email ? this.errors.email[0] : "";
+            this.tel_error = this.errors.tel ? this.errors.tel[0] : "";
+            this.zip_error = this.errors.zip ? this.errors.zip[0] : "";
+            this.address_error = this.errors.address
+                ? this.errors.address[0]
+                : "";
+        }
+        if (!Array.isArray(this.old)) {
+            this.name = this.old.name;
+            this.email = this.old.email;
+            this.tel = this.old.tel;
+            this.zip = this.old.zip;
+            this.address = this.old.address;
+        }
     },
 };
 </script>

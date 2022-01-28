@@ -16,7 +16,8 @@ class TicketController extends Controller
             $query->orWhere('name', 'like', "%{$request->q}%")->orWhere('converted_name', 'like', "%{$request->q}%");
         }
         $tickets = $query->get();
-        return view('tickets.index', compact(['tickets']));
+        $entered_count = Ticket::where('entered_at', '<>', null)->count();
+        return view('tickets.index', compact(['tickets', 'entered_count']));
     }
 
     public function enter($id)

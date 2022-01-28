@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiCheckEmailUniqueController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ApiTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::apiResource('tickets', ApiTicketController::class);
-
-Route::post('check-email', ApiCheckEmailUniqueController::class);
+Route::post('check-email', [ApiController::class, 'checkEmail']);
+Route::get('get-address', [ApiController::class, 'getAddress']);

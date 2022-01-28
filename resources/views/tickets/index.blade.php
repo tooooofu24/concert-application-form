@@ -1,30 +1,17 @@
 @extends('layouts.layout')
 
 @section('content')
-<nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-    <div class="container-fluid align-items-center">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="">チケット一覧</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container-lg">
-    <div class="mt-3">
+@include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
+<div class="container-lg pt-5 mt-3">
+    <div class="pt-3">
         @if(session('message'))
-        <div class="">
+        <div>
             <div class="alert alert-success" role="alert">
                 {{ session('message') }}
             </div>
         </div>
         @endif
-        <div class="py-3">
+        <div class="pb-3">
             <form action="">
                 <div class="row">
                     <div class="col pe-0">
@@ -39,7 +26,8 @@
             </form>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover caption-top">
+                <caption>来場者 {{ $entered_count }} / {{ count($tickets) }}人</caption>
                 <thead>
                     <tr>
                         <th style="width: 50px;">id</th>
