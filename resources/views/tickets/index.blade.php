@@ -15,7 +15,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container-lg">
     <div class="mt-3">
         @if(session('message'))
         <div class="">
