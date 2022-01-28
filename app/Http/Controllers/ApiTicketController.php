@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ApiTicketController extends Controller
 {
@@ -28,7 +27,6 @@ class ApiTicketController extends Controller
     {
         $ticket = new Ticket();
         $ticket->fill($request->all());
-        $ticket->uid = Str::uuid();
         $ticket->save();
         return $ticket;
     }

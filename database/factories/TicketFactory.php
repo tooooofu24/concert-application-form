@@ -22,13 +22,14 @@ class TicketFactory extends Factory
             $address = $address_data[2];
         }
         return [
-            'uid' => Str::random(30),
+            // 'uid' => Str::random(30),
             'name' => $this->faker->name(),
+            'converted_name' => $this->faker->name(),
             'email' => $this->faker->safeEmail(),
             'tel' => $this->faker->phoneNumber(),
-            'zip' => $this->faker->postcode(),
+            'zip' => substr($this->faker->postcode(), 0, 3) . '-' . substr($this->faker->postcode(), 3),
             'address' => $address,
-            'status' => $this->faker->randomElement([0, 1]),
+            'entered_at' => $this->faker->boolean() ? $this->faker->dateTime() : null
         ];
     }
 }

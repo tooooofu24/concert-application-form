@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="p-1 col-sm-6">
                         <label for="name" class="form-label m-0">氏名</label>
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                             <span
                                 class="input-group-text d-flex justify-content-center"
                                 style="width: 40px"
@@ -36,7 +36,7 @@
                         <label for="email" class="form-label m-0"
                             >メールアドレス</label
                         >
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                             <span
                                 class="input-group-text d-flex justify-content-center"
                                 style="width: 40px"
@@ -66,7 +66,7 @@
                     </div>
                     <div class="p-1 col-sm-6">
                         <label for="tel" class="form-label m-0">電話</label>
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                             <span
                                 class="input-group-text d-flex justify-content-center"
                                 style="width: 40px"
@@ -94,7 +94,7 @@
                     </div>
                     <div class="p-1 col-sm-6">
                         <label for="zip" class="form-label m-0">郵便番号</label>
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                             <span
                                 class="input-group-text d-flex justify-content-center"
                                 style="width: 40px"
@@ -123,7 +123,7 @@
                     </div>
                     <div class="p-1 col">
                         <label for="address" class="form-label m-0">住所</label>
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                             <span
                                 class="input-group-text d-flex justify-content-center"
                                 style="width: 40px"
@@ -144,6 +144,7 @@
                                 name="address"
                                 required
                                 v-model="address"
+                                @blur="checkAddress()"
                             ></textarea>
                             <div class="invalid-feedback">
                                 {{ address_error }}
@@ -219,7 +220,15 @@ export default {
             var reg =
                 /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/;
             if (reg.test(this.email)) {
-                this.email_error = "";
+                axios
+                    .post("/api/check-email", { email: this.email })
+                    .then((res) => {
+                        if (res.data) {
+                            this.email_error = "既に登録済のメールアドレスです";
+                        } else {
+                            this.email_error = "";
+                        }
+                    });
             } else {
                 this.email_error = "メールアドレスを正しく入力してください";
             }
@@ -259,7 +268,7 @@ export default {
                 })
                 .then((res) => {
                     console.log(res);
-                    window.location.href = "/application";
+                    window.location.href = "/application?is_created=true";
                 });
         },
     },

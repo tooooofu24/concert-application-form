@@ -17,11 +17,12 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->string('uid');
             $table->string('name');
+            $table->string('converted_name');
             $table->string('email');
             $table->string('tel');
             $table->string('zip');
             $table->string('address');
-            $table->integer('status')->default(0)->comment('0: 未入場, 1: 入場済');
+            $table->dateTime('entered_at')->nullable();
             $table->timestamps();
         });
     }

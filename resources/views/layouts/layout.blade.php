@@ -24,20 +24,6 @@
 <body>
     <main>
         <div id="app">
-            <!-- <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-                <div class="container-fluid align-items-center">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="">チケット一覧</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav> -->
             @yield('content')
         </div>
     </main>
