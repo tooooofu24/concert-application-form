@@ -38,3 +38,7 @@ Route::post('admin/tickets/{id}', [TicketController::class, 'enter'])->name('tic
 Route::delete('admin/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('test', function () {
+    return view('ticket');
+});

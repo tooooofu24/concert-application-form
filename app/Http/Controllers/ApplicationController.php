@@ -37,7 +37,7 @@ class ApplicationController extends Controller
      */
     public function show($uid)
     {
-        $ticket = Ticket::where('uid', $uid)->findOrFail();
+        $ticket = Ticket::where('uid', $uid)->firstOrFail();
         return view('ticket', compact(['ticket']));
     }
 }

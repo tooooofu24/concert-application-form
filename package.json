@@ -30,5 +30,8 @@
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.8.3"
+    },
+    "dependencies": {
+        "keen-slider": "^6.6.3"
     }
 }

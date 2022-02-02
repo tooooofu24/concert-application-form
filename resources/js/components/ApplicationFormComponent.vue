@@ -1,162 +1,178 @@
 <template>
-    <div class="card">
-        <div class="card-header">申込フォーム</div>
-        <div class="card-body">
-            <form action="/application" method="POST">
-                <input type="hidden" name="_token" :value="csrf" />
-                <div class="row">
-                    <div class="p-1 col-sm-6">
-                        <label for="name" class="form-label m-0">氏名</label>
-                        <div class="input-group has-validation">
-                            <span
-                                class="input-group-text d-flex justify-content-center"
-                                style="width: 40px"
+    <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mx-auto">
+        <div class="card">
+            <div class="card-header">申込フォーム</div>
+            <div class="card-body">
+                <form action="/application" method="POST">
+                    <input type="hidden" name="_token" :value="csrf" />
+                    <div class="row">
+                        <div class="p-1 col-sm-6">
+                            <label for="name" class="form-label m-0"
+                                >氏名</label
                             >
-                                <i class="fas fa-user"></i>
-                            </span>
-                            <input
-                                type="text"
-                                :class="[
-                                    'form-control',
-                                    {
-                                        'is-invalid': name_error,
-                                        'is-valid': name_error === '',
-                                    },
-                                ]"
-                                placeholder="例：佐藤太郎"
-                                id="name"
-                                name="name"
-                                required
-                                v-model="name"
-                                @blur="checkName()"
-                            />
-                            <div class="invalid-feedback">{{ name_error }}</div>
-                        </div>
-                    </div>
-                    <div class="p-1 col-sm-6">
-                        <label for="email" class="form-label m-0"
-                            >メールアドレス</label
-                        >
-                        <div class="input-group has-validation">
-                            <span
-                                class="input-group-text d-flex justify-content-center"
-                                style="width: 40px"
-                            >
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                            <input
-                                type="text"
-                                :class="[
-                                    'form-control',
-                                    {
-                                        'is-invalid': email_error,
-                                        'is-valid': email_error === '',
-                                    },
-                                ]"
-                                placeholder="例：chiba-univ@email.com"
-                                id="email"
-                                name="email"
-                                required
-                                v-model="email"
-                                @blur="checkEmail()"
-                            />
-                            <div class="invalid-feedback">
-                                {{ email_error }}
+                            <div class="input-group has-validation">
+                                <span
+                                    class="input-group-text d-flex justify-content-center"
+                                    style="width: 40px"
+                                >
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    :class="[
+                                        'form-control',
+                                        {
+                                            'is-invalid': name_error,
+                                            'is-valid': name_error === '',
+                                        },
+                                    ]"
+                                    placeholder="例：佐藤太郎"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    v-model="name"
+                                    @blur="checkName()"
+                                />
+                                <div class="invalid-feedback">
+                                    {{ name_error }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-1 col-sm-6">
-                        <label for="tel" class="form-label m-0">電話</label>
-                        <div class="input-group has-validation">
-                            <span
-                                class="input-group-text d-flex justify-content-center"
-                                style="width: 40px"
+                        <div class="p-1 col-sm-6">
+                            <label for="email" class="form-label m-0"
+                                >メールアドレス</label
                             >
-                                <i class="fas fa-phone-alt"></i>
-                            </span>
-                            <input
-                                type="text"
-                                :class="[
-                                    'form-control',
-                                    {
-                                        'is-invalid': tel_error,
-                                        'is-valid': tel_error === '',
-                                    },
-                                ]"
-                                placeholder="例：012-3456-7890"
-                                id="tel"
-                                name="tel"
-                                required
-                                v-model="tel"
-                                @blur="checkTel()"
-                            />
-                            <div class="invalid-feedback">{{ tel_error }}</div>
-                        </div>
-                    </div>
-                    <div class="p-1 col-sm-6">
-                        <label for="zip" class="form-label m-0">郵便番号</label>
-                        <div class="input-group has-validation">
-                            <span
-                                class="input-group-text d-flex justify-content-center"
-                                style="width: 40px"
-                            >
-                                <i class="fas fa-map-marker-alt"></i>
-                            </span>
-                            <input
-                                type="text"
-                                :class="[
-                                    'form-control',
-                                    {
-                                        'is-invalid': zip_error,
-                                        'is-valid': zip_error === '',
-                                    },
-                                ]"
-                                placeholder="例：123-4567"
-                                id="zip"
-                                name="zip"
-                                maxlength="8"
-                                required
-                                v-model="zip"
-                                @blur="checkZip()"
-                            />
-                            <div class="invalid-feedback">{{ zip_error }}</div>
-                        </div>
-                    </div>
-                    <div class="p-1 col">
-                        <label for="address" class="form-label m-0">住所</label>
-                        <div class="input-group has-validation">
-                            <span
-                                class="input-group-text d-flex justify-content-center"
-                                style="width: 40px"
-                            >
-                                <i class="fas fa-location-arrow"></i>
-                            </span>
-                            <textarea
-                                type="text"
-                                :class="[
-                                    'form-control',
-                                    {
-                                        'is-invalid': address_error,
-                                        'is-valid': address_error === '',
-                                    },
-                                ]"
-                                placeholder="例：千葉市稲毛区弥生町1-33"
-                                id="address"
-                                name="address"
-                                required
-                                v-model="address"
-                                @blur="checkAddress()"
-                            ></textarea>
-                            <div class="invalid-feedback">
-                                {{ address_error }}
+                            <div class="input-group has-validation">
+                                <span
+                                    class="input-group-text d-flex justify-content-center"
+                                    style="width: 40px"
+                                >
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    :class="[
+                                        'form-control',
+                                        {
+                                            'is-invalid': email_error,
+                                            'is-valid': email_error === '',
+                                        },
+                                    ]"
+                                    placeholder="例：chiba-univ@email.com"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    v-model="email"
+                                    @blur="checkEmail()"
+                                />
+                                <div class="invalid-feedback">
+                                    {{ email_error }}
+                                </div>
                             </div>
                         </div>
+                        <div class="p-1 col-sm-6">
+                            <label for="tel" class="form-label m-0">電話</label>
+                            <div class="input-group has-validation">
+                                <span
+                                    class="input-group-text d-flex justify-content-center"
+                                    style="width: 40px"
+                                >
+                                    <i class="fas fa-phone-alt"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    :class="[
+                                        'form-control',
+                                        {
+                                            'is-invalid': tel_error,
+                                            'is-valid': tel_error === '',
+                                        },
+                                    ]"
+                                    placeholder="例：012-3456-7890"
+                                    id="tel"
+                                    name="tel"
+                                    required
+                                    v-model="tel"
+                                    @blur="checkTel()"
+                                />
+                                <div class="invalid-feedback">
+                                    {{ tel_error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 col-sm-6">
+                            <label for="zip" class="form-label m-0"
+                                >郵便番号</label
+                            >
+                            <div class="input-group has-validation">
+                                <span
+                                    class="input-group-text d-flex justify-content-center"
+                                    style="width: 40px"
+                                >
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    :class="[
+                                        'form-control',
+                                        {
+                                            'is-invalid': zip_error,
+                                            'is-valid': zip_error === '',
+                                        },
+                                    ]"
+                                    placeholder="例：123-4567"
+                                    id="zip"
+                                    name="zip"
+                                    maxlength="8"
+                                    required
+                                    v-model="zip"
+                                    @blur="checkZip()"
+                                />
+                                <div class="invalid-feedback">
+                                    {{ zip_error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 col">
+                            <label for="address" class="form-label m-0"
+                                >住所</label
+                            >
+                            <div class="input-group has-validation">
+                                <span
+                                    class="input-group-text d-flex justify-content-center"
+                                    style="width: 40px"
+                                >
+                                    <i class="fas fa-location-arrow"></i>
+                                </span>
+                                <textarea
+                                    type="text"
+                                    :class="[
+                                        'form-control',
+                                        {
+                                            'is-invalid': address_error,
+                                            'is-valid': address_error === '',
+                                        },
+                                    ]"
+                                    placeholder="例：千葉市稲毛区弥生町1-33"
+                                    id="address"
+                                    name="address"
+                                    required
+                                    v-model="address"
+                                    @blur="checkAddress()"
+                                ></textarea>
+                                <div class="invalid-feedback">
+                                    {{ address_error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-3 pb-1">
+                            <button class="btn btn-sm btn-primary">
+                                申し込む
+                            </button>
+                        </div>
                     </div>
-                    <div class="text-center pt-3 pb-1">
-                        <button class="btn btn-sm btn-primary">申し込む</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </template>
