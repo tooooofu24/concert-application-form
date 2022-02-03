@@ -43,6 +43,6 @@ Route::post('admin/tickets/send-email/{id}', [TicketController::class, 'sendMail
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function () {
-    Mail::to('toya24xxx@i.softbank.jp')->send(new InvitationMail(Ticket::find(1)));
+    // Mail::to('toya24xxx@i.softbank.jp')->send(new InvitationMail(Ticket::find(1)));
     return view('ticket');
 });

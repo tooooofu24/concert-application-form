@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Mail\InvitationMail;
 use App\Service\GooApiService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class Ticket extends Model
@@ -27,6 +29,9 @@ class Ticket extends Model
             $ticket->uid = Str::uuid();
             if (!$ticket->converted_name)
                 $ticket->converted_name = GooApiService::convert($ticket->name);
+        });
+        self::created(function (self $ticket) {
+            Mail::to($ticket->email)->send(new InvitationMail($ticket));
         });
     }
 }
