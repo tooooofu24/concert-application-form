@@ -11,52 +11,56 @@
             </div>
         </div>
         @endif
-        <div class="pb-3">
-            <form action="">
-                <div class="row">
-                    <div class="col pe-0">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="氏名を検索（ひらがなでも可）" id="q" name="q" value="{{ request()->q }}" />
+        <div class="card p-2">
+            <div class="card-body">
+                <div class="pb-3">
+                    <form action="">
+                        <div class="row">
+                            <div class="col pe-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="氏名を検索（ひらがなでも可）" id="q" name="q" value="{{ request()->q }}" />
+                                </div>
+                            </div>
+                            <div style="width: 100px" class="d-flex justify-content-end align-items-center ps-0">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
+                            </div>
                         </div>
-                    </div>
-                    <div style="width: 100px" class="d-flex justify-content-end align-items-center ps-0">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
-                    </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-hover caption-top">
-                <caption>来場者 {{ $entered_count }} / {{ count($tickets) }}人</caption>
-                <thead>
-                    <tr>
-                        <th style="width: 50px;">id</th>
-                        <th scope="col" class="text-nowrap">氏名</th>
-                        <th scope="col" class="text-nowrap">メールアドレス</th>
-                        <th scope="col" class="text-nowrap">電話番号</th>
-                        <th scope="col" class="text-nowrap">入場時間</th>
-                        <th style="width: 110px;" class="text-center text-nowrap">入場済/未入場</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($tickets as $ticket)
-                    <tr role="button" data-bs-toggle="modal" data-bs-target="#modal_{{ $ticket->id }}">
-                        <td class="align-middle text-nowrap">{{ $ticket->id }}</td>
-                        <td class="align-middle text-nowrap">{{ $ticket->name }}</td>
-                        <td class="align-middle text-nowrap">{{ $ticket->email }}</td>
-                        <td class="align-middle text-nowrap">{{ $ticket->tel }}</td>
-                        <td class="align-middle text-nowrap">{{ optional($ticket->entered_at)->format('n/d G:s') }}</td>
-                        <td class="align-middle text-center text-nowrap">
-                            @if($ticket->entered_at)
-                            <span class="badge bg-success">入場済</span>
-                            @else
-                            <span class="badge bg-danger">未入場</span>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                <div class="table-responsive border-0">
+                    <table class="table table-hover caption-top rounded table-centered table-nowrap border-0">
+                        <caption class="border-0">来場者 {{ $entered_count }} / {{ count($tickets) }}人</caption>
+                        <thead class="table-secondary border-0 rounded">
+                            <tr class="border-0">
+                                <th style="width: 50px;" class="border-0 rounded-start">id</th>
+                                <th scope="col" class="text-nowrap border-0">氏名</th>
+                                <th scope="col" class="text-nowrap border-0">メールアドレス</th>
+                                <th scope="col" class="text-nowrap border-0">電話番号</th>
+                                <th scope="col" class="text-nowrap border-0">入場時間</th>
+                                <th style="width: 110px;" class="text-center text-nowrap border-0 rounded-end">入場済/未入場</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($tickets as $ticket)
+                            <tr role="button" data-bs-toggle="modal" data-bs-target="#modal_{{ $ticket->id }}" class="border-0">
+                                <td class="align-middle text-nowrap border-0">{{ $ticket->id }}</td>
+                                <td class="align-middle text-nowrap border-0">{{ $ticket->name }}</td>
+                                <td class="align-middle text-nowrap border-0">{{ $ticket->email }}</td>
+                                <td class="align-middle text-nowrap border-0">{{ $ticket->tel }}</td>
+                                <td class="align-middle text-nowrap border-0">{{ optional($ticket->entered_at)->format('n/d G:s') }}</td>
+                                <td class="align-middle text-center text-nowrap border-0">
+                                    @if($ticket->entered_at)
+                                    <span class="badge bg-success">入場済</span>
+                                    @else
+                                    <span class="badge bg-danger">未入場</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     @foreach($tickets as $ticket)
@@ -124,18 +128,19 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">削除する</button>
                     </form>
+
+                    <form action="{{ route('tickets.send-mail',['id'=>$ticket->id]) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-success">メール再送信</button>
+                    </form>
                     @if($ticket->entered_at)
-                    <button type="button" class="btn btn-success" disabled>入場済</button>
+                    <button type="button" class="btn btn-primary" disabled>入場済</button>
                     @else
                     <form action="{{ route('tickets.enter',['id'=>$ticket->id]) }}" method="POST" class="d-inline">
                         @csrf
-                        <button type="submit" class="btn btn-success">入場する</button>
+                        <button type="submit" class="btn btn-primary">入場する</button>
                     </form>
                     @endif
-                    <form action="" method="GET" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">メール再送信</button>
-                    </form>
                 </div>
             </div>
         </div>

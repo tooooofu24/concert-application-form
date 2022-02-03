@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvitationMail;
 use App\Models\Ticket;
 use App\Service\GooApiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -33,5 +35,12 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
         return redirect()->route('tickets.index')->with('message', 'チケットを削除しました！');
+    }
+
+    public function sendMail($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+        Mail::to($ticket->email)->send(new InvitationMail($ticket));
+        return redirect()->back()->with('message', 'メールを送信しました！');;
     }
 }

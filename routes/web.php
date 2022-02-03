@@ -3,6 +3,9 @@
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TicketController;
+use App\Mail\InvitationMail;
+use App\Models\Ticket;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +29,6 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
 // 申込フォーム
 Route::get('/application', [ApplicationController::class, 'index'])->name('application.index');
 Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
@@ -36,9 +38,11 @@ Route::get('/application/{uid}', [ApplicationController::class, 'show'])->name('
 Route::get('admin/tickets', [TicketController::class, 'index'])->name('tickets.index');
 Route::post('admin/tickets/{id}', [TicketController::class, 'enter'])->name('tickets.enter');
 Route::delete('admin/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
+Route::post('admin/tickets/send-email/{id}', [TicketController::class, 'sendMail'])->name('tickets.send-mail');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function () {
+    Mail::to('toya24xxx@i.softbank.jp')->send(new InvitationMail(Ticket::find(1)));
     return view('ticket');
 });

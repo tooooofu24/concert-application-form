@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed w-100" style="z-index: 2;top: 0;">
     <div class="container">
-        <a class="navbar-brand fs-6" href="">
+        <span class="navbar-brand mb-0 fs-6">
             {{ $title }}
-        </a>
+        </span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
