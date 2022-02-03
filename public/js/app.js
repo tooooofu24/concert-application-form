@@ -22617,6 +22617,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.slider = new keen_slider__WEBPACK_IMPORTED_MODULE_1__["default"](this.$refs.slider, {
+      loop: true,
       created: function created(s) {},
       slideChanged: function slideChanged(s) {
         _this.index = s.track.details.rel;
@@ -22978,7 +22979,7 @@ var _hoisted_1 = {
   "class": "col-sm-6"
 };
 var _hoisted_2 = {
-  "class": "card rounded-3 p-0"
+  "class": "card rounded-3 p-0 border-0"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -22990,6 +22991,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
     "border-radius": "0.3rem 0.3rem 0px 0px"
   },
   alt: "チケットの画像"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "ticket"
 })], -1
 /* HOISTED */
 );
@@ -23002,27 +23005,11 @@ var _hoisted_5 = {
   "class": "keen-slider"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  "class": "position-absolute w-100 ticket-footer",
-  src: "images/ticket-image-footer.png",
-  alt: "チケットの画像"
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"keen-slider__slide position-relative\" style=\"padding-top:20%;\"><img class=\"position-absolute w-100 ticket-footer\" src=\"images/ticket-image-footer.png\" alt=\"チケットの画像\"><div class=\"position-absolute w-100 ticket-footer h-100\"><div class=\"p-3 h-100 align-middle d-flex align-items-center fs-5\"><i class=\"fas fa-angle-double-right ms-auto\"></i></div></div></div><div class=\"keen-slider__slide position-relative\" style=\"padding-top:20%;\"><div class=\"position-absolute w-100 ticket-footer\"><img class=\"position-absolute w-100 ticket-footer\" src=\"images/ticket-image-footer-used.png\" alt=\"チケットの画像\"></div></div>", 2);
 
-var _hoisted_7 = [_hoisted_6];
+var _hoisted_8 = [_hoisted_6];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.slides, function (slide) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "keen-slider__slide position-relative",
-      style: {
-        "padding-top": "20%"
-      },
-      key: slide.name
-    }, _hoisted_7);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))], 512
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, _hoisted_8, 512
   /* NEED_PATCH */
   )])])]);
 }
@@ -28180,7 +28167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.ticket-footer {\n  border-style: dashed;\n  border-width: 0.1rem 0 0 0;\n  top: 0;\n  border-radius: 0px 0px 0.3rem 0.3rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.ticket {\n  background-image: linear-gradient(\n    to right,\n    #808080,\n    #808080 1rem,\n    transparent 0.3rem,\n    transparent 10px\n  ); /* 幅2の線を作る */\n  background-size: 1.5rem 0.2rem; /* グラデーションの幅・高さを指定 */\n  background-position: left bottom; /* 背景の開始位置を指定 */\n  background-repeat: repeat-x; /* 横向きにのみ繰り返す */\n}\n.ticket-footer {\n  top: 0;\n  border-radius: 0px 0px 0.3rem 0.3rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
