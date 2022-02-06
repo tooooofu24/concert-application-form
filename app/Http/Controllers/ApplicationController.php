@@ -40,4 +40,9 @@ class ApplicationController extends Controller
         $ticket = Ticket::where('uid', $uid)->firstOrFail();
         return view('ticket', compact(['ticket']));
     }
+
+    public function complete()
+    {
+        return view('complete');
+    }
 }

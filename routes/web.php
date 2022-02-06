@@ -32,7 +32,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 // 申込フォーム
 Route::get('/application', [ApplicationController::class, 'index'])->name('application.index');
 Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
-Route::get('/application/{uid}', [ApplicationController::class, 'show'])->name('application.show');
+Route::get('/application/tickets/{uid}', [ApplicationController::class, 'show'])->name('application.show');
+Route::get('/application/complete', [ApplicationController::class, 'complete'])->name('application.complete');
 
 // 管理者用画面
 Route::get('admin/tickets', [TicketController::class, 'index'])->name('tickets.index');
@@ -43,6 +44,5 @@ Route::post('admin/tickets/send-email/{id}', [TicketController::class, 'sendMail
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function () {
-    // Mail::to('toya24xxx@i.softbank.jp')->send(new InvitationMail(Ticket::find(1)));
     return view('ticket');
 });

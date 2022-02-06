@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
 <div class="container-lg pt-5 mt-3">
-    <div class="pt-3">
+    <div class="py-3">
         @if(session('message'))
         <div>
             <div class="alert alert-success" role="alert">
@@ -13,7 +13,7 @@
         @endif
         <div class="card p-2">
             <div class="card-body">
-                <div class="pb-3">
+                <div class="">
                     <form action="">
                         <div class="row">
                             <div class="col pe-0">
