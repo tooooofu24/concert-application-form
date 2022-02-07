@@ -37,4 +37,15 @@ class ApiController extends Controller
         }
         return false;
     }
+
+    function enter($uid)
+    {
+        if ($uid == 'sample') {
+            return;
+        }
+        $ticket = Ticket::where('uid', $uid)->firstOrFail();
+        $ticket->entered_at = now();
+        $ticket->save();
+        return;
+    }
 }

@@ -43,6 +43,6 @@ Route::post('admin/tickets/send-email/{id}', [TicketController::class, 'sendMail
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('test', function () {
+Route::get('tickets/sample', function () {
     return view('ticket');
 });

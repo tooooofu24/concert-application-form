@@ -9,7 +9,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav  ms-auto">
                 <li class="nav-item px-1">
                     <a class="nav-link fs-5" href="https://mobile.twitter.com/jhQSTtIRE8hTwJI" target="_blank"><i class="fab fa-twitter"></i></a>
                 </li>

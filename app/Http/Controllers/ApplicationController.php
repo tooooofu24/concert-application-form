@@ -25,7 +25,7 @@ class ApplicationController extends Controller
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
-        return redirect()->route('application.index')->with('message', '申し込みが完了しました！');
+        return redirect()->route('application.complete')->with('complete', true);
     }
 
     /**
@@ -43,6 +43,9 @@ class ApplicationController extends Controller
 
     public function complete()
     {
+        if (!session('complete')) {
+            return redirect()->route('application.index');
+        }
         return view('complete');
     }
 }

@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\ApiCheckEmailUniqueController;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\ApiEnterController;
-use App\Http\Controllers\ApiTicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +21,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('check-email', [ApiController::class, 'checkEmail']);
 Route::get('get-address', [ApiController::class, 'getAddress']);
-Route::post('tickets/enter/{uid}', ApiEnterController::class);
+Route::post('application/enter/{uid}', [ApiController::class, 'enter']);
