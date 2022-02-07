@@ -5,7 +5,7 @@
 ## 🎧 作成したページ
 - [申込ページ](https://chiba-u-concert-2021.sumomo.ne.jp/application)
 - [管理者画面](https://chiba-u-concert-2021.sumomo.ne.jp/admin/tickets)
-- [チケットページ](https://chiba-u-concert-2021.sumomo.ne.jp/test)
+- [チケットページ(サンプル)](https://chiba-u-concert-2021.sumomo.ne.jp/tickets/sample)
 
 ## 🎷 使用技術
 - Laravel 8.81.0
