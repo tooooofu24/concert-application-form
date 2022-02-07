@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
+
+@section('title', '音楽科卒業演奏会 - 管理画面')
+
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
 <div class="container-lg pt-5 mt-3">
     <div class="py-3">

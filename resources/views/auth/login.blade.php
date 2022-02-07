@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
+
+@section('title', '音楽科卒業演奏会 - ログイン画面')
+
 @include('layouts.admin-navigation',['title'=>'管理者ログインページ'])
 <div class="h-100 d-flex align-items-center">
     <div class="container-lg">
