@@ -38,7 +38,7 @@
               <div
                 class="p-3 h-100 align-middle d-flex align-items-center fs-5"
               >
-                <span class="fw-bold ps-2">入場する</span>
+                <span class="fw-bold ps-2">スライドして入場</span>
                 <i
                   class="fas fa-angle-double-right ms-auto me-4 fa-lg animation"
                 ></i>
@@ -90,7 +90,7 @@
                 @click="entry()"
                 data-bs-dismiss="modal"
               >
-                スライドして入場
+                入場する
               </button>
             </div>
           </div>

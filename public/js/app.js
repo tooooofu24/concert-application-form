@@ -19870,7 +19870,7 @@ var _hoisted_11 = {
   }
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<img class=\"position-absolute w-100 ticket-footer\" src=\"/images/ticket-image-footer.png\" alt=\"チケットの画像\"><div class=\"position-absolute w-100 ticket-footer h-100\"><div class=\"p-3 h-100 align-middle d-flex align-items-center fs-5\"><span class=\"fw-bold ps-2\">入場する</span><i class=\"fas fa-angle-double-right ms-auto me-4 fa-lg animation\"></i></div></div>", 2);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<img class=\"position-absolute w-100 ticket-footer\" src=\"/images/ticket-image-footer.png\" alt=\"チケットの画像\"><div class=\"position-absolute w-100 ticket-footer h-100\"><div class=\"p-3 h-100 align-middle d-flex align-items-center fs-5\"><span class=\"fw-bold ps-2\">スライドして入場</span><i class=\"fas fa-angle-double-right ms-auto me-4 fa-lg animation\"></i></div></div>", 2);
 
 var _hoisted_14 = [_hoisted_12];
 
@@ -19934,7 +19934,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.entry();
     }),
     "data-bs-dismiss": "modal"
-  }, " スライドして入場 ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 入場済みモーダル "), _hoisted_22]);
+  }, " 入場する ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 入場済みモーダル "), _hoisted_22]);
 }
 
 /***/ }),
