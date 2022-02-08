@@ -12,4 +12,4 @@
 - Vue.js 3.x
 - [Keen Slider(JavaScriptのライブラリ)](https://keen-slider.io/)
 - Bootstrap
-- さくらのレンタルサーバ
+- さくらのレンタルサーバ(Webサーバ、MySQL、メールサーバ等)
