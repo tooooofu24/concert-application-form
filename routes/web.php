@@ -58,5 +58,6 @@ Route::get('tickets/sample', function () {
 
 Route::get('test', function () {
     $ticket = Ticket::find(1);
-    return view('emails.invitation', compact(['ticket']));
+    $mail = new InvitationMail($ticket);
+    return $mail->build();
 });
