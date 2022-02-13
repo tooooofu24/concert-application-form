@@ -10,9 +10,11 @@
 @component('mail::panel')
 日時：2022年3月5日(土)<br>
 場所：<a href="https://goo.gl/maps/qempHaxQhJtRaafg8" target="_blank">千葉県教育会館 新館 大ホール</a><br>
-会場：12:15<br>
+開場：12:15<br>
 開演：12:30<br>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3243.8769744093365!2d140.11978281525677!3d35.606101180211944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1526b6633d2ed995%3A0x7806d7aea6439b19!2z5Y2D6JGJ55yM5pWZ6IKy5Lya6aSoIOaWsOmkqA!5e0!3m2!1sja!2sjp!4v1644746111177!5m2!1sja!2sjp" width="100%" height="100px" style="border:0; margin-top:5px" allowfullscreen="" loading="lazy"></iframe>
+<a href="https://goo.gl/maps/qempHaxQhJtRaafg8" target="_blank">
+    <img src="/images/map.jpg" alt="地図" width="100%" style="padding: 1rem 1rem 0 1rem;">
+</a>
 @endcomponent
 
 音楽科一同、ご来場を心よりお待ちしております。
