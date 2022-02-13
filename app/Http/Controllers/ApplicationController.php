@@ -10,7 +10,7 @@ class ApplicationController extends Controller
 {
     public function index(Request $request)
     {
-        return view('application');
+        return view('application.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class ApplicationController extends Controller
     public function show($uid)
     {
         $ticket = Ticket::where('uid', $uid)->firstOrFail();
-        return view('ticket', compact(['ticket']));
+        return view('application.ticket', compact(['ticket']));
     }
 
     public function complete()
@@ -46,6 +46,6 @@ class ApplicationController extends Controller
         if (!session('complete')) {
             return redirect()->route('application.index');
         }
-        return view('complete');
+        return view('application.complete');
     }
 }

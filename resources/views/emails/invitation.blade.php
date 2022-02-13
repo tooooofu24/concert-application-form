@@ -372,7 +372,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td>
-                                            <p>ご予約いただきありがとうございます。</p>
+                                            <p>令和3年度千葉大学教育学部音楽科卒業演奏会にお申し込みいただき、誠にありがとうございます。</p>
                                             <p>演奏会当日は受付の際に、こちらのメールに添付されているチケット画面をご提示ください。</p>
                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                                 <tbody>
@@ -391,12 +391,18 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p>
-                                                日時：2022年3月5日(土)<br>
-                                                場所：千葉県教育会館<br>
-                                                開場：12:15<br>
-                                                開演：12:30
-                                            </p>
+                                            <div>
+                                                <p style="font-size: 12px !important;">
+                                                    日時：2022年3月5日(土)<br>
+                                                    場所：千葉県教育会館 新館 大ホール<br>
+                                                    開場：12:15<br>
+                                                    開演：12:30
+                                                </p>
+                                                <p style="font-size: 12px !important;">
+                                                    ※ご来場の際は、感染症対策のため、マスクの着用をお願いいたします。
+                                                </p>
+                                                <p>音楽科一同、ご来場を心よりお待ちしております。</p>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -412,8 +418,7 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">千葉大学教育学部音楽科</span>
-                                    <br>リンクが開けない場合は<a href="{{ route('application.show',['uid'=>$ticket->uid]) }}">こちら</a>からお開きください
+                                    <span class="apple-link">リンクが開けない場合は<br><a href="{{ route('application.show',['uid'=>$ticket->uid]) }}">こちら</a>からお開きください</span>
                                 </td>
                             </tr>
                             <tr>

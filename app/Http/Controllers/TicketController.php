@@ -19,7 +19,7 @@ class TicketController extends Controller
         }
         $tickets = $query->get();
         $entered_count = Ticket::where('entered_at', '<>', null)->count();
-        return view('tickets.index', compact(['tickets', 'entered_count']));
+        return view('admin.tickets', compact(['tickets', 'entered_count']));
     }
 
     public function enter($id)

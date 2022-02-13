@@ -25,24 +25,38 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 // 申込フォーム
-Route::get('/application', [ApplicationController::class, 'index'])->name('application.index');
-Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
-Route::get('/application/tickets/{uid}', [ApplicationController::class, 'show'])->name('application.show');
-Route::get('/application/complete', [ApplicationController::class, 'complete'])->name('application.complete');
+Route::group(['as' => 'application.', 'prefix' => 'application'], function () {
+    Route::get('/', [ApplicationController::class, 'index'])->name('index');
+    Route::post('/', [ApplicationController::class, 'store'])->name('store');
+    Route::get('tickets/{uid}', [ApplicationController::class, 'show'])->name('show');
+    Route::get('/complete', [ApplicationController::class, 'complete'])->name('complete');
+});
 
 // 管理者用画面
-Route::get('admin/tickets', [TicketController::class, 'index'])->name('tickets.index');
-Route::post('admin/tickets/{id}', [TicketController::class, 'enter'])->name('tickets.enter');
-Route::delete('admin/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
-Route::post('admin/tickets/send-email/{id}', [TicketController::class, 'sendMail'])->name('tickets.send-mail');
+Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'tickets'], function () {
+        Route::get('/', [TicketController::class, 'index'])->name('index');
+        Route::post('{id}', [TicketController::class, 'enter'])->name('enter');
+        Route::delete('{id}', [TicketController::class, 'destroy'])->name('destroy');
+        Route::post('send-email/{id}', [TicketController::class, 'sendMail'])->name('send-mail');
+    });
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// サンプルのチケット画面
 Route::get('tickets/sample', function () {
     return view('ticket');
+});
+
+Route::get('test', function () {
+    $ticket = Ticket::find(1);
+    return view('emails.invitation', compact(['ticket']));
 });
