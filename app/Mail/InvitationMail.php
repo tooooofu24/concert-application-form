@@ -31,6 +31,6 @@ class InvitationMail extends Mailable
     public function build()
     {
         $ticket = $this->ticket;
-        return $this->markdown('emails.invitation', compact('ticket'))->subject('ご登録完了メール');
+        return $this->markdown('emails.invitation', compact('ticket'))->subject('お申し込み完了メール');
     }
 }
