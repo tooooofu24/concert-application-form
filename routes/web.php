@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], 
 
 // サンプルのチケット画面
 Route::get('tickets/sample', function () {
-    return view('ticket');
+    return view('application.ticket');
 });
 
 Route::get('test', function () {

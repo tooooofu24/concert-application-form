@@ -10,12 +10,12 @@
 
     <title>@yield('title')</title>
 
-    <meta name="description" content="ページの内容を表す文章" />
+    <meta name="description" content="@yield('description')" />
 
     <meta property="og:url" content="{{ route('application.index') }}" />
     <meta property="og:title" content="@yield('title')" />
-    <meta property="og:description" content="/images/ticket-image.png" />
-    <meta property="og:image" content="" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:image" content="{{ asset('images/ticket-image.png') }}" />
     <meta property="og:site_name" content="音楽科卒業演奏会" />
     <meta property="og:locale" content="ja_JP" />
 

@@ -14,7 +14,7 @@
                     <p class="card-text" style="font-size: 0.7rem;">
                         ご登録のメールアドレス宛にチケット情報をお送りしました。<br>
                         当日、入場の際にそちらのメールに添付されているURLをご準備の上ご来場ください。<br>
-                        万が一、メールが届いていない場合はお手数ですが、<a href="mailto:admin@chiba-u-concert-2021.sumomo.ne.jp?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。">こちらのリンク</a>からお問い合わせください。
+                        万が一、メールが届いていない場合はお手数ですが、<a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。">こちらのリンク</a>からお問い合わせください。
                     </p>
                     <a style="font-size: 0.7rem;" href="{{ route('application.index') }}" class="card-link">申し込み画面に戻る</a>
                 </div>

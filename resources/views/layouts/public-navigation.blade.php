@@ -17,7 +17,7 @@
                     <a class="nav-link fs-5" href="https://www.instagram.com/chiba_music18/" target="_blank"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li class="nav-item px-1">
-                    <a class="nav-link fs-5" href="mailto:admin@chiba-u-concert-2021.sumomo.ne.jp?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。"><i class="fas fa-envelope"></i></a>
+                    <a class="nav-link fs-5" href="mailto:{{ env('MAIL_FROM_ADDRESS') }}?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。"><i class="fas fa-envelope"></i></a>
                 </li>
             </ul>
         </div>

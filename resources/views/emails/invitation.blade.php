@@ -13,7 +13,7 @@
 開場：12:15<br>
 開演：12:30<br>
 <a href="https://goo.gl/maps/qempHaxQhJtRaafg8" target="_blank">
-    <img src="/images/map.jpg" alt="地図" width="100%" style="padding: 1rem 1rem 0 1rem;">
+    <img src="{{ asset('images/map.jpg') }}" alt="地図" width="100%" style="padding: 1rem 1rem 0 1rem;">
 </a>
 @endcomponent
 
@@ -22,6 +22,6 @@
 <span style="font-size: 80%;">
     ※ご来場の際は感染症対策のため、マスクの着用をお願いいたします。<br>
     ※上記のリンクがうまく動作しない場合は<a href="{{ route('application.show',['uid'=>$ticket->uid]) }}" target="_blank">こちら</a>からチケット画面をご確認いただけます。<br>
-    ※何かご不明な点などありましたら<a href="mailto:admin@chiba-u-concert-2021.sumomo.ne.jp?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。" target="_blank">こちら</a>からお問い合わせください。
+    ※何かご不明な点などありましたら<a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}?subject=お問い合わせ&body=お問い合わせ内容をご記入ください。%0D%0A返信は手動で行なっているため、お時間がかかることがあります。" target="_blank">こちら</a>からお問い合わせください。
 </span>
 @endcomponent
