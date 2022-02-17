@@ -1,10 +1,10 @@
 <template>
   <div class="col-11 col-sm-9 col-md-7 col-lg-5 mx-auto">
-    <div class="card p-0 border-0">
+    <div class="card rounded-3 p-0 border-0">
       <div class="ratio ratio-16x9">
         <img
           src="/images/ticket-image.png"
-          style="object-fit: cover;"
+          style="object-fit: cover; border-radius: 0.3rem 0.3rem 0px 0px"
           alt="チケットの画像"
         />
         <div
@@ -204,10 +204,6 @@ export default {
 
 .bg-gray {
   background-color: #888888;
-}
-
-.card {
-  border-radius: 3rem;
 }
 
 @keyframes arrow {

@@ -2,6 +2,7 @@
 
 @section('content')
 
+@section('description', 'この度はお申し込み頂きありがとうございます。当日のご来場をお待ちしています。')
 @section('title', '音楽科卒業演奏会 - 申込完了画面')
 
 @include('layouts.public-navigation')

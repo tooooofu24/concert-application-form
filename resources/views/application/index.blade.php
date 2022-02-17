@@ -2,6 +2,7 @@
 
 @section('content')
 
+@section('description', '千葉大学音楽科卒業演奏会の申し込み画面です。')
 @section('title', '音楽科卒業演奏会 - 申込画面')
 
 @include('layouts.public-navigation')

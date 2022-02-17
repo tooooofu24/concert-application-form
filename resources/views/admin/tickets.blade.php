@@ -2,6 +2,7 @@
 
 @section('content')
 
+@section('description', '千葉大学音楽科卒業演奏会の管理画面です。')
 @section('title', '音楽科卒業演奏会 - 管理画面')
 
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
