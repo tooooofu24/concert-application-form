@@ -62,6 +62,31 @@
         </div>
       </div>
     </div>
+    <!-- 使用可能前モーダル -->
+    <div
+      class="modal px-4"
+      tabindex="-1"
+      id="pre_modal"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p class="mb-3">入場処理は受付当日の午前11:30から可能です。</p>
+            <div class="text-end">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                @click="canselEntry()"
+                data-bs-dismiss="modal"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 確認モーダル -->
     <div
       class="modal px-4"
@@ -149,7 +174,16 @@ export default {
   methods: {
     // 確認モーダルを表示するメソッド
     confirmEntry() {
-      var modal = new bootstrap.Modal(document.getElementById("comfirm_modal"));
+      console.log(new Date());
+      let start_time = new Date("2022-03-05 11:30:00");
+      // 入場前は使用させない
+      if (start_time > new Date()) {
+        var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
+      } else {
+        var modal = new bootstrap.Modal(
+          document.getElementById("comfirm_modal")
+        );
+      }
       modal.show();
     },
     // キャンセルされた際のメソッド

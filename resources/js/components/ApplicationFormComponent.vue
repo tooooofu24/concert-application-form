@@ -6,7 +6,7 @@
         <form action="/application" method="POST">
           <input type="hidden" name="_token" :value="csrf" />
           <div class="row">
-            <div class="p-1 col-sm-6">
+            <div class="p-1 col-12">
               <label for="name" class="form-label m-0">氏名</label>
               <div class="input-group has-validation">
                 <span
@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="p-1 col-sm-6">
-              <label for="tel" class="form-label m-0">電話</label>
+              <label for="tel" class="form-label m-0">緊急連絡先</label>
               <div class="input-group has-validation">
                 <span
                   class="input-group-text d-flex justify-content-center"
@@ -96,69 +96,33 @@
                 </div>
               </div>
             </div>
-            <div class="p-1 col-sm-6">
-              <label for="zip" class="form-label m-0">郵便番号</label>
-              <div class="input-group has-validation">
-                <span
-                  class="input-group-text d-flex justify-content-center"
-                  style="width: 40px"
-                >
-                  <i class="fas fa-map-marker-alt"></i>
-                </span>
-                <input
-                  type="text"
-                  :class="[
-                    'form-control',
-                    {
-                      'is-invalid': zip_error,
-                      'is-valid': zip_error === '',
-                    },
-                  ]"
-                  placeholder="例：123-4567"
-                  id="zip"
-                  name="zip"
-                  maxlength="8"
-                  required
-                  v-model="zip"
-                  @blur="checkZip()"
-                />
-                <div class="invalid-feedback">
-                  {{ zip_error }}
+            <div class="px-2 py-3">
+              <div
+                class="
+                  card
+                  bg-light
+                  border-top-0
+                  border-end-0
+                  border-bottom-0
+                  border-secondary
+                  border-3
+                  rounded-0
+                "
+              >
+                <div class="card-body">
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >※新型コロナウイルス感染症対策のため、ご来場される方全員分の申込をお願い致します。<br />
+                      ※携帯電話等をお持ちでないお子様は、保護者様のメールアドレスをご入力いただきますよう、お願い致します。</small
+                    >
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="p-1 col">
-              <label for="address" class="form-label m-0">住所</label>
-              <div class="input-group has-validation">
-                <span
-                  class="input-group-text d-flex justify-content-center"
-                  style="width: 40px"
-                >
-                  <i class="fas fa-location-arrow"></i>
-                </span>
-                <textarea
-                  type="text"
-                  :class="[
-                    'form-control',
-                    {
-                      'is-invalid': address_error,
-                      'is-valid': address_error === '',
-                    },
-                  ]"
-                  placeholder="例：千葉市稲毛区弥生町1-33"
-                  id="address"
-                  name="address"
-                  required
-                  v-model="address"
-                  @blur="checkAddress()"
-                ></textarea>
-                <div class="invalid-feedback">
-                  {{ address_error }}
-                </div>
-              </div>
-            </div>
-            <div class="text-center pt-3 pb-1">
-              <button class="btn btn-sm btn-primary">申し込む</button>
+            <div class="text-center">
+              <button class="btn btn-sm btn-primary rounded-pill px-3">
+                申し込む
+              </button>
             </div>
           </div>
         </form>
@@ -175,37 +139,15 @@ export default {
       name: "",
       email: "",
       tel: "",
-      zip: "",
-      address: "",
       // バリデーションエラー
       name_error: null,
       email_error: null,
       tel_error: null,
-      zip_error: null,
-      address_error: null,
       // csrfトークン
       csrf: document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content"),
     };
-  },
-  watch: {
-    zip: function (zip, old_zip) {
-      if (zip.length == 3 && old_zip.length <= 2) {
-        this.zip = zip + "-";
-      }
-      // 郵便番号の形式だったら郵便番号を自動補完
-      var reg = /^[0-9]{3}-[0-9]{4}$/;
-      if (reg.test(this.zip)) {
-        this.zip_error = "";
-        axios.get("/api/get-address?zip=" + this.zip).then((res) => {
-          this.address = res.data;
-        });
-      }
-    },
-    address: function (address) {
-      this.checkAddress();
-    },
   },
   methods: {
     checkName() {
@@ -233,37 +175,6 @@ export default {
         this.tel_error = "電話番号を正しく入力してください";
       }
     },
-    checkZip() {
-      var reg = /^[0-9]{3}-[0-9]{4}$/;
-      if (reg.test(this.zip)) {
-        this.zip_error = "";
-      } else {
-        this.zip_error = "郵便番号を正しく入力してください";
-      }
-    },
-    checkAddress() {
-      if (this.address) {
-        this.address_error = "";
-      } else {
-        this.address_error = "住所は必須です";
-      }
-    },
-  },
-  computed: {
-    is_validated() {
-      return (
-        this.name &&
-        this.email &&
-        this.tel &&
-        this.zip &&
-        this.address &&
-        !this.name_error &&
-        !this.email_error &&
-        !this.tel_error &&
-        !this.zip_error &&
-        !this.address_error
-      );
-    },
   },
   props: { errors: Object, old: Object },
   mounted: function () {
@@ -271,15 +182,11 @@ export default {
       this.name_error = this.errors.name ? this.errors.name[0] : "";
       this.email_error = this.errors.email ? this.errors.email[0] : "";
       this.tel_error = this.errors.tel ? this.errors.tel[0] : "";
-      this.zip_error = this.errors.zip ? this.errors.zip[0] : "";
-      this.address_error = this.errors.address ? this.errors.address[0] : "";
     }
     if (!Array.isArray(this.old)) {
       this.name = this.old.name;
       this.email = this.old.email;
       this.tel = this.old.tel;
-      this.zip = this.old.zip;
-      this.address = this.old.address;
     }
   },
 };

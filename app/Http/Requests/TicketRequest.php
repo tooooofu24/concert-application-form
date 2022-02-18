@@ -32,8 +32,6 @@ class TicketRequest extends FormRequest
                 'required', 'email',
             ],
             'tel' => ['required', 'regex:/^(0{1}\d{1,4}-{0,1}\d{1,4}-{0,1}\d{4})$/'],
-            'zip' => ['required', 'regex:/^([0-9]{3}-{0,1}[0-9]{4})$/'],
-            'address' => ['required'],
         ];
     }
 
@@ -48,8 +46,6 @@ class TicketRequest extends FormRequest
             'name' => '氏名',
             'email' => 'メールアドレス',
             'tel' => '電話番号',
-            'zip' => '郵便番号',
-            'address' => '住所',
         ];
     }
 

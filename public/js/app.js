@@ -19280,39 +19280,13 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       email: "",
       tel: "",
-      zip: "",
-      address: "",
       // バリデーションエラー
       name_error: null,
       email_error: null,
       tel_error: null,
-      zip_error: null,
-      address_error: null,
       // csrfトークン
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content")
     };
-  },
-  watch: {
-    zip: function zip(_zip, old_zip) {
-      var _this = this;
-
-      if (_zip.length == 3 && old_zip.length <= 2) {
-        this.zip = _zip + "-";
-      } // 郵便番号の形式だったら郵便番号を自動補完
-
-
-      var reg = /^[0-9]{3}-[0-9]{4}$/;
-
-      if (reg.test(this.zip)) {
-        this.zip_error = "";
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/get-address?zip=" + this.zip).then(function (res) {
-          _this.address = res.data;
-        });
-      }
-    },
-    address: function address(_address) {
-      this.checkAddress();
-    }
   },
   methods: {
     checkName: function checkName() {
@@ -19340,27 +19314,6 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.tel_error = "電話番号を正しく入力してください";
       }
-    },
-    checkZip: function checkZip() {
-      var reg = /^[0-9]{3}-[0-9]{4}$/;
-
-      if (reg.test(this.zip)) {
-        this.zip_error = "";
-      } else {
-        this.zip_error = "郵便番号を正しく入力してください";
-      }
-    },
-    checkAddress: function checkAddress() {
-      if (this.address) {
-        this.address_error = "";
-      } else {
-        this.address_error = "住所は必須です";
-      }
-    }
-  },
-  computed: {
-    is_validated: function is_validated() {
-      return this.name && this.email && this.tel && this.zip && this.address && !this.name_error && !this.email_error && !this.tel_error && !this.zip_error && !this.address_error;
     }
   },
   props: {
@@ -19372,16 +19325,12 @@ __webpack_require__.r(__webpack_exports__);
       this.name_error = this.errors.name ? this.errors.name[0] : "";
       this.email_error = this.errors.email ? this.errors.email[0] : "";
       this.tel_error = this.errors.tel ? this.errors.tel[0] : "";
-      this.zip_error = this.errors.zip ? this.errors.zip[0] : "";
-      this.address_error = this.errors.address ? this.errors.address[0] : "";
     }
 
     if (!Array.isArray(this.old)) {
       this.name = this.old.name;
       this.email = this.old.email;
       this.tel = this.old.tel;
-      this.zip = this.old.zip;
-      this.address = this.old.address;
     }
   }
 });
@@ -19454,7 +19403,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 確認モーダルを表示するメソッド
     confirmEntry: function confirmEntry() {
-      var modal = new bootstrap.Modal(document.getElementById("comfirm_modal"));
+      console.log(new Date());
+      var start_time = new Date("2022-03-05 11:30:00"); // 入場前は使用させない
+
+      if (start_time > new Date()) {
+        var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
+      } else {
+        var modal = new bootstrap.Modal(document.getElementById("comfirm_modal"));
+      }
+
       modal.show();
     },
     // キャンセルされた際のメソッド
@@ -19520,7 +19477,7 @@ var _hoisted_7 = {
   "class": "row"
 };
 var _hoisted_8 = {
-  "class": "p-1 col-sm-6"
+  "class": "p-1 col-12"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
@@ -19584,7 +19541,7 @@ var _hoisted_18 = {
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "tel",
   "class": "form-label m-0"
-}, "電話", -1
+}, "緊急連絡先", -1
 /* HOISTED */
 );
 
@@ -19606,72 +19563,8 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_22 = {
   "class": "invalid-feedback"
 };
-var _hoisted_23 = {
-  "class": "p-1 col-sm-6"
-};
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "zip",
-  "class": "form-label m-0"
-}, "郵便番号", -1
-/* HOISTED */
-);
-
-var _hoisted_25 = {
-  "class": "input-group has-validation"
-};
-
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "input-group-text d-flex justify-content-center",
-  style: {
-    "width": "40px"
-  }
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-map-marker-alt"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_27 = {
-  "class": "invalid-feedback"
-};
-var _hoisted_28 = {
-  "class": "p-1 col"
-};
-
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "address",
-  "class": "form-label m-0"
-}, "住所", -1
-/* HOISTED */
-);
-
-var _hoisted_30 = {
-  "class": "input-group has-validation"
-};
-
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "input-group-text d-flex justify-content-center",
-  style: {
-    "width": "40px"
-  }
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fas fa-location-arrow"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_32 = {
-  "class": "invalid-feedback"
-};
-
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "text-center pt-3 pb-1"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "btn btn-sm btn-primary"
-}, "申し込む")], -1
-/* HOISTED */
-);
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"px-2 py-3\"><div class=\"card bg-light border-top-0 border-end-0 border-bottom-0 border-secondary border-3 rounded-0\"><div class=\"card-body\"><p class=\"card-text\"><small class=\"text-muted\">※新型コロナウイルス感染症対策のため、ご来場される方全員分の申込をお願い致します。<br> ※携帯電話等をお持ちでないお子様は、保護者様のメールアドレスをご入力いただきますよう、お願い致します。</small></p></div></div></div><div class=\"text-center\"><button class=\"btn btn-sm btn-primary rounded-pill px-3\"> 申し込む </button></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -19740,48 +19633,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS, HYDRATE_EVENTS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.tel]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.tel_error), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-control', {
-      'is-invalid': _ctx.zip_error,
-      'is-valid': _ctx.zip_error === ''
-    }]),
-    placeholder: "例：123-4567",
-    id: "zip",
-    name: "zip",
-    maxlength: "8",
-    required: "",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return _ctx.zip = $event;
-    }),
-    onBlur: _cache[7] || (_cache[7] = function ($event) {
-      return $options.checkZip();
-    })
-  }, null, 34
-  /* CLASS, HYDRATE_EVENTS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.zip]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.zip_error), 1
-  /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-    type: "text",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['form-control', {
-      'is-invalid': _ctx.address_error,
-      'is-valid': _ctx.address_error === ''
-    }]),
-    placeholder: "例：千葉市稲毛区弥生町1-33",
-    id: "address",
-    name: "address",
-    required: "",
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-      return _ctx.address = $event;
-    }),
-    onBlur: _cache[9] || (_cache[9] = function ($event) {
-      return $options.checkAddress();
-    })
-  }, null, 34
-  /* CLASS, HYDRATE_EVENTS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.address]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.address_error), 1
-  /* TEXT */
-  )])]), _hoisted_33])])])])]);
+  )])]), _hoisted_23])])])])]);
 }
 
 /***/ }),
@@ -19907,7 +19759,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_16 = {
   "class": "modal px-4",
   tabindex: "-1",
-  id: "comfirm_modal",
+  id: "pre_modal",
   "data-bs-backdrop": "static"
 };
 var _hoisted_17 = {
@@ -19921,35 +19773,67 @@ var _hoisted_19 = {
 };
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-center mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 本当に入場しますか？"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("（この操作は取り消せません） ")], -1
+  "class": "mb-3"
+}, "入場処理は受付当日の午前11:30から可能です。", -1
 /* HOISTED */
 );
 
 var _hoisted_21 = {
   "class": "text-end"
 };
+var _hoisted_22 = {
+  "class": "modal px-4",
+  tabindex: "-1",
+  id: "comfirm_modal",
+  "data-bs-backdrop": "static"
+};
+var _hoisted_23 = {
+  "class": "modal-dialog modal-dialog-centered"
+};
+var _hoisted_24 = {
+  "class": "modal-content"
+};
+var _hoisted_25 = {
+  "class": "modal-body"
+};
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"modal px-4\" tabindex=\"-1\" id=\"complete_modal\"><div class=\"modal-dialog modal-dialog-centered\"><div class=\"modal-content p-2\"><div class=\"modal-header p-2 border-bottom-0\"><button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button></div><div class=\"modal-body pt-0\"><p class=\"text-center\">入場処理が完了しました！</p></div></div></div></div>", 1);
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-center mb-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 本当に入場しますか？"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("（この操作は取り消せません） ")], -1
+/* HOISTED */
+);
+
+var _hoisted_27 = {
+  "class": "text-end"
+};
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"modal px-4\" tabindex=\"-1\" id=\"complete_modal\"><div class=\"modal-dialog modal-dialog-centered\"><div class=\"modal-content p-2\"><div class=\"modal-header p-2 border-bottom-0\"><button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button></div><div class=\"modal-body pt-0\"><p class=\"text-center\">入場処理が完了しました！</p></div></div></div></div>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, $props.uid == 'sample' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用前のスライド "), !$data.is_used ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用済みのスライド "), _hoisted_15], 512
   /* NEED_PATCH */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 確認モーダル "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用可能前モーダル "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary btn-sm",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.canselEntry();
+    }),
+    "data-bs-dismiss": "modal"
+  }, " OK ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 確認モーダル "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-secondary btn-sm me-2",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.canselEntry();
     }),
     "data-bs-dismiss": "modal"
   }, " キャンセル "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-primary btn-sm",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.entry();
     }),
     "data-bs-dismiss": "modal"
-  }, " 入場する ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 入場済みモーダル "), _hoisted_22]);
+  }, " 入場する ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 入場済みモーダル "), _hoisted_28]);
 }
 
 /***/ }),

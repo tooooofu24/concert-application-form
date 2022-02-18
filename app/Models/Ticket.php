@@ -31,7 +31,9 @@ class Ticket extends Model
                 $ticket->converted_name = GooApiService::convert($ticket->name);
         });
         self::created(function (self $ticket) {
-            Mail::to($ticket->email)->send(new InvitationMail($ticket));
+            if (app()->isProduction()) {
+                Mail::to($ticket->email)->send(new InvitationMail($ticket));
+            }
         });
     }
 }
