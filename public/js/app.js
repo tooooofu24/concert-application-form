@@ -19403,8 +19403,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 確認モーダルを表示するメソッド
     confirmEntry: function confirmEntry() {
-      console.log(new Date());
-      var start_time = new Date("2022-03-05 11:30:00"); // 入場前は使用させない
+      var start_time = new Date("2022/03/05 11:30:00"); // 入場前は使用させない
 
       if (start_time > new Date()) {
         var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
@@ -19774,7 +19773,7 @@ var _hoisted_19 = {
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-3"
-}, "入場処理は受付当日の午前11:30から可能です。", -1
+}, "チケットは受付当日の11:30から使用可能です。", -1
 /* HOISTED */
 );
 
@@ -19799,7 +19798,7 @@ var _hoisted_25 = {
 
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-center mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 本当に入場しますか？"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("（この操作は取り消せません） ")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 本当に入場しますか？"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("（この操作は取り消せません）"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br")], -1
 /* HOISTED */
 );
 

@@ -72,7 +72,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body">
-            <p class="mb-3">入場処理は受付当日の午前11:30から可能です。</p>
+            <p class="mb-3">チケットは受付当日の11:30から使用可能です。</p>
             <div class="text-end">
               <button
                 type="button"
@@ -98,7 +98,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <p class="text-center mb-3">
-              本当に入場しますか？<br />（この操作は取り消せません）
+              本当に入場しますか？<br />（この操作は取り消せません）<br />
             </p>
             <div class="text-end">
               <button
@@ -174,8 +174,7 @@ export default {
   methods: {
     // 確認モーダルを表示するメソッド
     confirmEntry() {
-      console.log(new Date());
-      let start_time = new Date("2022-03-05 11:30:00");
+      let start_time = new Date("2022/03/05 11:30:00");
       // 入場前は使用させない
       if (start_time > new Date()) {
         var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
