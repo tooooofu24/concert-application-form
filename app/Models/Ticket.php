@@ -27,8 +27,9 @@ class Ticket extends Model
         parent::boot();
         self::creating(function (self $ticket) {
             $ticket->uid = Str::uuid();
-            if (!$ticket->converted_name)
+            if (app()->isProduction()) {
                 $ticket->converted_name = GooApiService::convert($ticket->name);
+            }
         });
         self::created(function (self $ticket) {
             if (app()->isProduction()) {

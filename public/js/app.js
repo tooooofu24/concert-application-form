@@ -19403,14 +19403,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 確認モーダルを表示するメソッド
     confirmEntry: function confirmEntry() {
-      var start_time = new Date("2022/03/05 11:30:00"); // 入場前は使用させない
-
-      if (start_time > new Date()) {
-        var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
-      } else {
-        var modal = new bootstrap.Modal(document.getElementById("comfirm_modal"));
-      }
-
+      var modal = new bootstrap.Modal(document.getElementById("comfirm_modal"));
       modal.show();
     },
     // キャンセルされた際のメソッド
