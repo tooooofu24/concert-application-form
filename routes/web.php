@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TicketController;
 use App\Mail\InvitationMail;
+use App\Mail\PreviousMail;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,11 @@ Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], 
         Route::delete('{id}', [TicketController::class, 'destroy'])->name('destroy');
         Route::post('send-email/{id}', [TicketController::class, 'sendMail'])->name('send-mail');
     });
+    Route::get('email-test', function () {
+        $ticket = Ticket::find(1);
+        $mail = new PreviousMail($ticket);
+        return $mail->build();
+    });
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,10 +60,4 @@ Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], 
 // サンプルのチケット画面
 Route::get('tickets/sample', function () {
     return view('application.ticket');
-});
-
-Route::get('test', function () {
-    $ticket = Ticket::find(1);
-    $mail = new InvitationMail($ticket);
-    return $mail->build();
 });
