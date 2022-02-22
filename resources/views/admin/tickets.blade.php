@@ -36,8 +36,7 @@
                         <caption class="border-0">来場者 {{ count($tickets->where('entered_at', '<>', null)) }} / {{ count($tickets) }}人</caption>
                         <thead class="table-secondary border-0 rounded">
                             <tr class="border-0">
-                                <th style="width: 50px;" class="border-0 rounded-start text-center">id</th>
-                                <th scope="col" class="text-nowrap border-0 text-center">氏名</th>
+                                <th scope="col" class="text-nowrap border-0 text-center rounded-start">氏名</th>
                                 <th scope="col" class="text-nowrap border-0 text-center">メールアドレス</th>
                                 <th scope="col" class="text-nowrap border-0 text-center">電話番号</th>
                                 <th scope="col" class="text-nowrap border-0 text-center">入場時間</th>
@@ -47,12 +46,11 @@
                         <tbody>
                             @foreach($tickets as $ticket)
                             <tr role="button" data-bs-toggle="modal" data-bs-target="#modal_{{ $ticket->id }}" class="border-0">
-                                <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->id }}</td>
-                                <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->name }}</td>
+                                <td class="align-middle text-nowrap border-0 text-center rounded-start">{{ $ticket->name }}</td>
                                 <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->email }}</td>
                                 <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->tel }}</td>
                                 <td class="align-middle text-nowrap border-0 text-center">{{ optional($ticket->entered_at)->format('H:s') }}</td>
-                                <td class="align-middle text-center text-nowrap border-0">
+                                <td class="align-middle text-center text-nowrap border-0 rounded-end">
                                     @if($ticket->entered_at)
                                     <span class="badge bg-secondary rounded-pill p-2">入場済</span>
                                     @else
