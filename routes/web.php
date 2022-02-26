@@ -46,7 +46,9 @@ Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], 
         Route::get('/', [TicketController::class, 'index'])->name('index');
         Route::post('{id}', [TicketController::class, 'enter'])->name('enter');
         Route::delete('{id}', [TicketController::class, 'destroy'])->name('destroy');
+        Route::put('{id}', [TicketController::class, 'update'])->name('update');
         Route::post('send-email/{id}', [TicketController::class, 'sendMail'])->name('send-mail');
+        Route::post('/', [TicketController::class, 'store'])->name('store');
     });
     Route::get('email-test', function () {
         $ticket = Ticket::find(1);

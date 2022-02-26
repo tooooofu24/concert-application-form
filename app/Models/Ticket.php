@@ -14,7 +14,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'uid', 'name', 'email', 'tel', 'zip', 'address', 'status', 'converted_name'
+        'uid', 'name', 'email', 'tel', 'converted_name', 'tel_reserved_flag'
     ];
 
     protected $casts = [
@@ -22,12 +22,17 @@ class Ticket extends Model
         'entered_at' => 'datetime'
     ];
 
+    public function getIsEmptyAttribute()
+    {
+        return !$this->name || !$this->converted_name || !$this->tel || !$this->email;
+    }
+
     public static function boot()
     {
         parent::boot();
         self::creating(function (self $ticket) {
             $ticket->uid = Str::uuid();
-            if (!$ticket->converted_name)
+            if (!$ticket->converted_name && $ticket->name)
                 $ticket->converted_name = GooApiService::convert($ticket->name);
         });
         self::created(function (self $ticket) {

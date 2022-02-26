@@ -9,58 +9,79 @@
 <div class="container-lg pt-5 mt-3">
     <div class="py-3">
         @if(session('message'))
-        <div>
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <div class="card p-2">
-            <div class="card-body">
-                <div class="">
-                    <form action="">
-                        <div class="row">
-                            <div class="col pe-0">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="氏名を検索（ひらがなでも可）" id="q" name="q" value="{{ request()->q }}" />
-                                </div>
-                            </div>
-                            <div style="width: 100px" class="d-flex justify-content-end align-items-center ps-0">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
-                            </div>
-                        </div>
-                    </form>
+        <form action="" class="pb-2">
+            <div class="row">
+                <div class="col pe-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-white" placeholder="氏名を検索（ひらがな可）" id="q" name="q" value="{{ request()->q }}" />
+                    </div>
                 </div>
-                <div class="table-responsive border-0">
-                    <table class="table table-hover caption-top rounded table-centered table-nowrap border-0">
-                        <caption class="border-0">来場者 {{ count($tickets->where('entered_at', '<>', null)) }} / {{ count($tickets) }}人</caption>
-                        <thead class="table-secondary border-0 rounded">
-                            <tr class="border-0">
-                                <th scope="col" class="text-nowrap border-0 text-center rounded-start">氏名</th>
-                                <th scope="col" class="text-nowrap border-0 text-center">メールアドレス</th>
-                                <th scope="col" class="text-nowrap border-0 text-center">電話番号</th>
-                                <th scope="col" class="text-nowrap border-0 text-center">入場時間</th>
-                                <th style="width: 110px;" class="text-center text-nowrap border-0 rounded-end">入場済/未入場</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div style="width: 100px" class="d-flex justify-content-end align-items-center ps-0">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
+                </div>
+            </div>
+            <div class="pt-2 ps-1">
+                <div class="form-check form-switch">
+                    <input class="form-check-input me-2" type="checkbox" role="switch" id="is_not_entered" name="is_not_entered" onchange="submit(this.form)" value="1" @if(request()->is_not_entered) checked @endif>
+                    <label class="form-check-label" for="is_not_entered">未入場に絞る</label>
+                </div>
+            </div>
+        </form>
+        <div class="card">
+            <div class="card-body px-1">
+                <div class="table-responsive">
+                    <div class="container">
+                        <div class="pb-1">
+                            <span class="text-muted">来場数 {{ count($tickets->where('entered_at', '<>', null)) }} / {{ count($tickets) }}人</span>
+                        </div>
+                        <ul class="list-group list-group-flush">
                             @foreach($tickets as $ticket)
-                            <tr role="button" data-bs-toggle="modal" data-bs-target="#modal_{{ $ticket->id }}" class="border-0">
-                                <td class="align-middle text-nowrap border-0 text-center rounded-start">{{ $ticket->name }}</td>
-                                <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->email }}</td>
-                                <td class="align-middle text-nowrap border-0 text-center">{{ $ticket->tel }}</td>
-                                <td class="align-middle text-nowrap border-0 text-center">{{ optional($ticket->entered_at)->format('H:s') }}</td>
-                                <td class="align-middle text-center text-nowrap border-0 rounded-end">
-                                    @if($ticket->entered_at)
-                                    <span class="badge bg-secondary rounded-pill p-2">入場済</span>
-                                    @else
-                                    <span class="badge bg-danger rounded-pill p-2">未入場</span>
-                                    @endif
-                                </td>
-                            </tr>
+                            <button class="list-group-item list-group-item-action px-0 text-start" data-bs-toggle="modal" data-bs-target="#modal_{{ $ticket->id }}">
+                                <div class="row align-items-center">
+                                    <div class="col-2">
+                                        <div class="ps-3">
+                                            @if($ticket->tel_reserved_flag)
+                                            <i class="fas fa-phone-alt fa-lg"></i>
+                                            @else
+                                            <i class="fab fa-instagram fa-lg"></i>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div><span class="fw-bold text-black text-opacity-75">{{ $ticket->name ?: $ticket->converted_name ?: '未入力' }}</span></div>
+                                        <div class="text-muted text-truncate">{{ $ticket->email ?: '未入力' }}</div>
+                                    </div>
+                                    <div class="text-end col-3">
+                                        @if($ticket->entered_at)
+                                        <span class="badge bg-secondary my-auto p-2 position-relative me-3">
+                                            入場済
+                                            @if($ticket->isEmpty)
+                                            <span class="position-absolute top-0 start-100 translate-middle border border-white badge rounded-circle bg-danger warning-badge align-items-center d-flex">
+                                                <i class="fas fa-exclamation mx-auto"></i>
+                                            </span>
+                                            @endif
+                                        </span>
+                                        @else
+                                        <span class="badge bg-danger my-auto p-2 position-relative me-3">
+                                            未入場
+                                            @if($ticket->isEmpty)
+                                            <span class="position-absolute top-0 start-100 translate-middle border border-white badge rounded-circle bg-danger warning-badge align-items-center d-flex">
+                                                <i class="fas fa-exclamation mx-auto"></i>
+                                            </span>
+                                            @endif
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </button>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,64 +92,155 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">チケット情報詳細</h5>
+                    <span class="modal-title">チケット情報詳細</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="{{ route('tickets.update',['id'=>$ticket->id]+request()->query()) }}" method="POST" onsubmit="return confirm('チケットを更新します。よろしいですか？')">
+                    @method('PUT')
+                    @csrf
+                    <div class="modal-body pt-0">
+                        <div class="pt-2 text-end">
+                            @if($ticket->entered_at)
+                            <span class="badge bg-secondary me-1"><i class="fas fa-walking me-1"></i>入場済</span>
+                            @else
+                            <span class="badge bg-secondary me-1"><i class="fas fa-exclamation-triangle me-1"></i></i>未入場</span>
+                            @endif
+                            @if($ticket->tel_reserved_flag)
+                            <span class="badge bg-secondary"><i class="fas fa-phone-alt me-1"></i>電話受付</span>
+                            @else
+                            <span class="badge bg-secondary"><i class="fab fa-instagram me-1"></i>SNS受付</span>
+                            @endif
+                        </div>
+                        <div class="row px-2">
+                            <div class="p-1 col-sm-6">
+                                <label for="name-{{$ticket->id}}" class="form-label m-0">氏名</label>
+                                <div class="input-group">
+                                    <span class="input-group-text d-flex justify-content-center">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control @if(!$ticket->name) is-invalid @endif" placeholder="例：千葉太郎" id="name-{{$ticket->id}}" name="name" value="{{ $ticket->name }}" />
+                                </div>
+                            </div>
+                            <div class="p-1 col-sm-6">
+                                <label for="converted_name-{{$ticket->id}}" class="form-label m-0">ふりがな</label>
+                                <div class="input-group">
+                                    <span class="input-group-text d-flex justify-content-center">
+                                        <i class="fas fa-user-tag"></i>
+                                    </span>
+                                    <input type="text" class="form-control @if(!$ticket->converted_name) is-invalid @endif" placeholder="例：ちばたろう" id="converted_name-{{$ticket->id}}" name="converted_name" value="{{ $ticket->converted_name }}" />
+                                </div>
+                            </div>
+                            <div class="p-1 col-sm-6">
+                                <label for="email-{{$ticket->id}}" class="form-label m-0">メールアドレス</label>
+                                <div class="input-group">
+                                    <span class="input-group-text d-flex justify-content-center">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control @if(!$ticket->email) is-invalid @endif" placeholder="例：chiba-univ@email.com" id="email-{{$ticket->id}}" name="email" value="{{ $ticket->email }}" />
+                                </div>
+                            </div>
+                            <div class="p-1 col-sm-6">
+                                <label for="tel-{{$ticket->id}}" class="form-label m-0">電話</label>
+                                <div class="input-group">
+                                    <span class="input-group-text d-flex justify-content-center">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </span>
+                                    <input type="text" class="form-control @if(!$ticket->tel) is-invalid @endif" placeholder="例：090-1234-5678" id="tel-{{$ticket->id}}" name="tel" value="{{ $ticket->tel }}" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer pt-1 border-0">
+                        {{-- 削除ボタン --}}
+                        <input form="delete-{{$ticket->id}}" type="submit" class="btn btn-danger rounded-pill fas" value="&#xf2ed;" />
+                        {{-- メール再送信ボタン --}}
+                        <input form="mail-{{$ticket->id}}" type="submit" class="btn btn-success rounded-pill fas" value="&#xf0e0;" />
+                        {{-- 手動入場ボタン --}}
+                        @if(!$ticket->entered_at)
+                        <input form="enter-{{$ticket->id}}" type="submit" class="btn btn-primary rounded-pill fas" value="&#xf554;" />
+                        @endif
+                        {{-- 更新ボタン --}}
+                        <input type="submit" class="btn btn-primary rounded-pill fw-bold h-auto ms-auto" value="更新" />
+                    </div>
+                </form>
+                <form id="delete-{{$ticket->id}}" action="{{ route('tickets.destroy',['id'=>$ticket->id]) }}" method="POST" class="d-none" onsubmit="return confirm('チケットを削除します。よろしいですか？')">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                <form id="mail-{{$ticket->id}}" action="{{ route('tickets.send-mail',['id'=>$ticket->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('メールを送信します。よろしいですか？')">
+                    @csrf
+                </form>
+                <form id="enter-{{$ticket->id}}" action="{{ route('tickets.enter',['id'=>$ticket->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('入場処理をします。よろしいですか？')">
+                    @csrf
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+
+{{-- 新規作成ボタン --}}
+<div class="position-fixed bottom-0 end-0 p-3" style="width: fit-content; z-index: 2">
+    <button class="btn btn-primary btn-xl shadow-lg rounded-circle" data-bs-toggle="modal" data-bs-target="#new_modal">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+<!-- 新規作成モーダル -->
+<div class="modal fade" id="new_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">チケット新規作成</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('tickets.store') }}" method="POST">
+                @csrf
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="p-1 col-12">
+                    <div class="row px-2">
+                        <div class="p-1 col-sm-6">
                             <label for="name" class="form-label m-0">氏名</label>
                             <div class="input-group">
-                                <span class="input-group-text d-flex justify-content-center" style="width: 40px">
+                                <span class="input-group-text d-flex justify-content-center">
                                     <i class="fas fa-user"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="例：千葉太郎" id="name" name="name" required value="{{ $ticket->name }}" style="pointer-events: none;" />
-                                <div class="invalid-feedback"></div>
+                                <input type="text" class="form-control" placeholder="例：千葉太郎" id="name" name="name" />
+                            </div>
+                        </div>
+                        <div class="p-1 col-sm-6">
+                            <label for="converted_name" class="form-label m-0">ふりがな</label>
+                            <div class="input-group">
+                                <span class="input-group-text d-flex justify-content-center">
+                                    <i class="fas fa-user-tag"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="例：ちばたろう" id="converted_name" name="converted_name" />
                             </div>
                         </div>
                         <div class="p-1 col-sm-6">
                             <label for="email" class="form-label m-0">メールアドレス</label>
                             <div class="input-group">
-                                <span class="input-group-text d-flex justify-content-center" style="width: 40px">
+                                <span class="input-group-text d-flex justify-content-center">
                                     <i class="fas fa-envelope"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="例：chiba-univ@email.com" id="email" name="email" required value="{{ $ticket->email }}" style="pointer-events: none;" />
+                                <input type="text" class="form-control" placeholder="例：chiba-univ@email.com" id="email" name="email" />
                             </div>
                         </div>
                         <div class="p-1 col-sm-6">
                             <label for="tel" class="form-label m-0">電話</label>
                             <div class="input-group">
-                                <span class="input-group-text d-flex justify-content-center" style="width: 40px">
+                                <span class="input-group-text d-flex justify-content-center">
                                     <i class="fas fa-phone-alt"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="例：090-1234-5678" id="tel" name="tel" required value="{{ $ticket->tel }}" style="pointer-events: none;" />
+                                <input type="text" class="form-control" placeholder="例：090-1234-5678" id="tel" name="tel" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <form action="{{ route('tickets.destroy',['id'=>$ticket->id]) }}" method="POST" class="d-inline me-auto" onsubmit="return confirm('チケットを削除します。よろしいですか？')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger rounded-pill px-3">削除する</button>
-                    </form>
-
-                    <form action="{{ route('tickets.send-mail',['id'=>$ticket->id]) }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-success rounded-pill px-3">メール再送信</button>
-                    </form>
-                    @if($ticket->entered_at)
-                    <button type="button" class="btn btn-primary rounded-pill px-3" disabled>入場済</button>
-                    @else
-                    <form action="{{ route('tickets.enter',['id'=>$ticket->id]) }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-primary rounded-pill px-3">入場する</button>
-                    </form>
-                    @endif
+                <div class="modal-footer pt-1 border-0">
+                    <input type="submit" class="btn btn-primary rounded-pill fw-bold h-auto ms-auto" value="作成" />
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-    @endforeach
 </div>
 @endsection

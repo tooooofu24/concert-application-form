@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed w-100" style="z-index: 2;top: 0;">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
         <span class="navbar-brand mb-0 fs-6">
             {{ $title }}

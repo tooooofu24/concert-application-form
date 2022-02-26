@@ -20,7 +20,8 @@ class TicketFactory extends Factory
             'converted_name' => $this->faker->name(),
             'email' => $this->faker->safeEmail(),
             'tel' => $this->faker->phoneNumber(),
-            'entered_at' => $this->faker->boolean() ? $this->faker->dateTime() : null
+            'entered_at' => $this->faker->boolean() ? $this->faker->dateTime() : null,
+            'tel_reserved_flag' => $this->faker->boolean(20),
         ];
     }
 }

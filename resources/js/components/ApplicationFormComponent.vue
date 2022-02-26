@@ -11,7 +11,7 @@
               <div class="input-group has-validation">
                 <span
                   class="input-group-text d-flex justify-content-center"
-                  style="width: 40px"
+                  
                 >
                   <i class="fas fa-user"></i>
                 </span>
@@ -41,7 +41,7 @@
               <div class="input-group has-validation">
                 <span
                   class="input-group-text d-flex justify-content-center"
-                  style="width: 40px"
+                  
                 >
                   <i class="fas fa-envelope"></i>
                 </span>
@@ -71,7 +71,7 @@
               <div class="input-group has-validation">
                 <span
                   class="input-group-text d-flex justify-content-center"
-                  style="width: 40px"
+                  
                 >
                   <i class="fas fa-phone-alt"></i>
                 </span>
