@@ -6,7 +6,9 @@
 友達が学科の卒業コンサートを行うということを知ったのがきっかけでした。  
 その友達が申し込みの方法を迷っていたところを、私が「作成しようか」と提案して開発が始まりました。
 
-## 🎧 作成したページ(下記のURLには開発用のダミーデータが入っています。)
+## 🎧 作成したページ
+※下記のURLには開発用のダミーデータが入っています。  
+※各ページはスマートフォンで最適に表示されるように調整しています。
 - [申込ページ](https://concert-application-form-sample.ms2n-xxx.com/application)
 ![image](https://user-images.githubusercontent.com/64852221/154796455-4fbe663a-2d51-4c68-9116-5bed1a3d0403.png)
 - [管理者画面](https://concert-application-form-sample.ms2n-xxx.com/admin/tickets)
