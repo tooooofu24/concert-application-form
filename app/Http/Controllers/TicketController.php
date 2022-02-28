@@ -13,7 +13,7 @@ class TicketController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ticket::query();
+        $query = Ticket::query()->orderBy('updated_at', 'DESC');
         if ($request->q) {
             $query->where(function ($query) use ($request) {
                 $query->orWhere('name', 'like', "%{$request->q}%")->orWhere('converted_name', 'like', "%{$request->q}%");
