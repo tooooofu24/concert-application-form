@@ -26,7 +26,7 @@
                         <form action="">
                             <div class="row mb-3">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-user fs-5"></i>
+                                    <i class="fas fa-user fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="氏名"></i>
                                 </div>
                                 <div class="col d-flex align-items-center">
                                     <input type="text" class="form-control bg-white" id="q" placeholder="氏名を検索（ひらがな可）" name="q" value="{{ request()->q }}">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-walking fs-4"></i>
+                                    <i class="fas fa-walking fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="入場済/未入場"></i>
                                 </div>
                                 <div class="col">
                                     <div class="row align-items-center text-center">
@@ -55,7 +55,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-mobile-alt fs-5"></i>
+                                    <i class="fas fa-mobile-alt fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="申込方法"></i>
                                 </div>
                                 <div class="col">
                                     <div class="row align-items-center text-center">
@@ -80,7 +80,7 @@
                                     <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
                                 </div>
                                 <div class="col d-flex justify-content-end align-items-end">
-                                    <a class="btn btn-danger btn-sm" href="{{ route('tickets.index') }}"><i class="fas fa-backspace"></i></a>
+                                    <a class="btn btn-danger btn-sm" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-backspace"></i></a>
                                 </div>
                             </div>
                         </form>
@@ -103,7 +103,7 @@
             <span class="badge bg-secondary mx-1"><i class="fab fa-instagram me-2"></i>SNS</span>
             @endif
             @if(request()->q || request()->enter || request()->reserve)
-            <span class="badge bg-danger ms-1"><a class="text-white" href="{{ route('tickets.index') }}"><i class="fas fa-backspace"></i></a></span>
+            <span class="badge bg-danger ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><a class="text-white" href="{{ route('tickets.index') }}"><i class="fas fa-backspace"></i></a></span>
             @endif
         </div>
         <div class="card">
