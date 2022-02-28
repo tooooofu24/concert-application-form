@@ -15,31 +15,63 @@ class TicketController extends Controller
     {
         $query = Ticket::query();
         if ($request->q) {
-            $query->orWhere('name', 'like', "%{$request->q}%")->orWhere('converted_name', 'like', "%{$request->q}%");
+            $query->where(function ($query) use ($request) {
+                $query->orWhere('name', 'like', "%{$request->q}%")->orWhere('converted_name', 'like', "%{$request->q}%");
+            });
+        }
+        if ($request->enter == 1) {
+            $query->where('entered_at', null);
+        }
+        if ($request->enter == 2) {
+            $query->where('entered_at', '<>', null);
+        }
+        if ($request->reserve == 1) {
+            $query->where('tel_reserved_flag', 1);
+        }
+        if ($request->reserve == 2) {
+            $query->where('tel_reserved_flag', 0);
         }
         $tickets = $query->get();
         return view('admin.tickets', compact(['tickets']));
     }
 
-    public function enter($id)
+    public function enter($id, Request $request)
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->entered_at = now();
         $ticket->save();
-        return redirect()->route('tickets.index')->with('message', '入場処理を完了しました！');
+        return redirect()->route('tickets.index', $request->query())->with('message', '入場処理が完了しました！');
     }
 
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
-        return redirect()->route('tickets.index')->with('message', 'チケットを削除しました！');
+        return redirect()->route('tickets.index', $request->query())->with('message', 'チケットを削除しました！');
     }
 
-    public function sendMail($id)
+    public function sendMail($id, Request $request)
     {
         $ticket = Ticket::findOrFail($id);
-        Mail::to($ticket->email)->send(new InvitationMail($ticket));
-        return redirect()->back()->with('message', 'メールを送信しました！');;
+        if ($ticket->email) {
+            Mail::to($ticket->email)->send(new InvitationMail($ticket));
+            return redirect()->route('tickets.index', $request->query())->with('message', 'メールを送信しました！');
+        }
+        return redirect()->route('tickets.index', $request->query())->with('message', 'メール送信に失敗しました。');
+    }
+
+    public function update($id, Request $request)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->fill($request->all())->save();
+        return redirect()->route('tickets.index', $request->query())->with('message', '更新しました！');
+    }
+
+    public function store(Request $request)
+    {
+        $ticket = new Ticket();
+        $ticket->tel_reserved_flag = true;
+        $ticket->fill($request->all())->save();
+        return redirect()->route('tickets.index', $request->query())->with('message', 'チケットを作成しました！');
     }
 }

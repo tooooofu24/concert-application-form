@@ -20,8 +20,6 @@ class CreateTicketsTable extends Migration
             $table->string('converted_name');
             $table->string('email');
             $table->string('tel');
-            // $table->string('zip');
-            // $table->string('address');
             $table->dateTime('entered_at')->nullable();
             $table->timestamps();
         });
