@@ -15,3 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .css('resources/css/app.css', 'public/css');
+
+if (mix.inProduction()) {
+    mix.version();
+}
