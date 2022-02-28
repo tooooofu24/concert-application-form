@@ -6,7 +6,7 @@
 @section('title', '音楽科卒業演奏会 - 管理画面')
 
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
-<div class="container-lg pt-5 mt-3">
+<div class="container-lg pt-5 mt-3" style="max-width: 50rem;">
     <div class="py-3">
         @if(session('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -14,27 +14,80 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <form action="" class="pb-2">
-            <div class="row">
-                <div class="col pe-0">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-white" placeholder="氏名を検索（ひらがな可）" id="q" name="q" value="{{ request()->q }}" />
+        <div class="accordion mb-3" id="accordionFlushExample">
+            <div class="accordion-item bg-white">
+                <div class="accordion-header">
+                    <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <i class="fas fa-search me-2"></i>検索
+                    </button>
+                </div>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <form action="">
+                            <div class="row mb-3">
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-user fs-5"></i>
+                                </div>
+                                <div class="col d-flex align-items-center">
+                                    <input type="text" class="form-control bg-white" id="q" placeholder="氏名を検索（ひらがな可）" name="q" value="{{ request()->q }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-walking fs-4"></i>
+                                </div>
+                                <div class="col">
+                                    <div class="row align-items-center text-center">
+                                        <div class="col">
+                                            <input type="radio" class="btn-check" name="enter" id="enter_all" value="0" checked>
+                                            <label class="btn btn-outline-success btn-sm" for="enter_all">全て</label>
+                                        </div>
+                                        <div class="col">
+                                            <input type="radio" class="btn-check" name="enter" id="enter_false" value="1">
+                                            <label class="btn btn-outline-success btn-sm" for="enter_false">未入場</label>
+                                        </div>
+                                        <div class="col">
+                                            <input type="radio" class="btn-check" name="enter" id="enter_true" value="2">
+                                            <label class="btn btn-outline-success btn-sm" for="enter_true">入場済</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-mobile-alt fs-5"></i>
+                                </div>
+                                <div class="col">
+                                    <div class="row align-items-center text-center">
+                                        <div class="col-4">
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_all" value="0" checked>
+                                            <label class="btn btn-outline-success btn-sm" for="reserve_all">全て</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_tel" value="1">
+                                            <label class="btn btn-outline-success btn-sm" for="reserve_tel">電話</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_sns" value="2">
+                                            <label class="btn btn-outline-success btn-sm" for="reserve_sns">SNS</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
+                            </div>
+                            <div class="text-end">
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div style="width: 100px" class="d-flex justify-content-end align-items-center ps-0">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
-                </div>
             </div>
-            <div class="pt-2 ps-1">
-                <div class="form-check form-switch">
-                    <input class="form-check-input me-2" type="checkbox" role="switch" id="is_not_entered" name="is_not_entered" onchange="submit(this.form)" value="1" @if(request()->is_not_entered) checked @endif>
-                    <label class="form-check-label" for="is_not_entered">未入場に絞る</label>
-                </div>
-            </div>
-        </form>
+        </div>
         <div class="card">
             <div class="card-body px-1">
-                <div class="table-responsive">
+                <div class="table-responsive mx-auto" style="max-width: 35rem;">
                     <div class="container">
                         <div class="pb-1">
                             <span class="text-muted">来場数 {{ count($tickets->where('entered_at', '<>', null)) }} / {{ count($tickets) }}人</span>
@@ -54,7 +107,11 @@
                                     </div>
                                     <div class="col-7">
                                         <div><span class="fw-bold text-black text-opacity-75">{{ $ticket->name ?: $ticket->converted_name ?: '未入力' }}</span></div>
-                                        <div class="text-muted text-truncate">{{ $ticket->email ?: '未入力' }}</div>
+                                        @if($ticket->tel)
+                                        <div class="text-muted text-truncate">{{ $ticket->tel }}</div>
+                                        @else
+                                        <div class="text-danger text-truncate">未入力</div>
+                                        @endif
                                     </div>
                                     <div class="text-end col-3">
                                         @if($ticket->entered_at)
@@ -153,12 +210,12 @@
                     </div>
                     <div class="modal-footer pt-1 border-0">
                         {{-- 削除ボタン --}}
-                        <input form="delete-{{$ticket->id}}" type="submit" class="btn btn-danger rounded-pill fas" value="&#xf2ed;" />
+                        <input form="delete-{{$ticket->id}}" type="submit" class="btn btn-danger rounded-pill fas" value="&#xf2ed;" data-bs-toggle="tooltip" data-bs-placement="top" title="チケットを削除" />
                         {{-- メール再送信ボタン --}}
-                        <input form="mail-{{$ticket->id}}" type="submit" class="btn btn-success rounded-pill fas" value="&#xf0e0;" />
+                        <input form="mail-{{$ticket->id}}" type="submit" class="btn btn-success rounded-pill fas" value="&#xf0e0;" data-bs-toggle="tooltip" data-bs-placement="top" title="メールを再送信" />
                         {{-- 手動入場ボタン --}}
                         @if(!$ticket->entered_at)
-                        <input form="enter-{{$ticket->id}}" type="submit" class="btn btn-primary rounded-pill fas" value="&#xf554;" />
+                        <input form="enter-{{$ticket->id}}" type="submit" class="btn btn-primary rounded-pill fas" value="&#xf554;" data-bs-toggle="tooltip" data-bs-placement="top" title="手動で入場" />
                         @endif
                         {{-- 更新ボタン --}}
                         <input type="submit" class="btn btn-primary rounded-pill fw-bold h-auto ms-auto" value="更新" />
@@ -181,7 +238,7 @@
 </div>
 
 {{-- 新規作成ボタン --}}
-<div class="position-fixed bottom-0 end-0 p-3" style="width: fit-content; z-index: 2">
+<div class="position-fixed bottom-0 end-0 p-3" style="width: fit-content; z-index: 2" data-bs-toggle="tooltip" data-bs-placement="left" title="チケット新規作成">
     <button class="btn btn-primary btn-xl shadow-lg rounded-circle" data-bs-toggle="modal" data-bs-target="#new_modal">
         <i class="fas fa-plus"></i>
     </button>

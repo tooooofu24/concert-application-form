@@ -19852,6 +19852,10 @@ window.bootstrap = __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle.js
     TicketComponent: _components_TicketComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }).mount('#app');
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl);
+});
 
 /***/ }),
 

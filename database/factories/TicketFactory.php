@@ -16,11 +16,11 @@ class TicketFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->boolean(90) ? $this->faker->name() : null,
             'converted_name' => $this->faker->name(),
-            'email' => $this->faker->safeEmail(),
-            'tel' => $this->faker->phoneNumber(),
-            'entered_at' => $this->faker->boolean() ? $this->faker->dateTime() : null,
+            'email' => $this->faker->boolean(90) ? $this->faker->safeEmail() : null,
+            'tel' => $this->faker->boolean(90) ? $this->faker->phoneNumber() : null,
+            'entered_at' => $this->faker->boolean(30) ? $this->faker->dateTime() : null,
             'tel_reserved_flag' => $this->faker->boolean(20),
         ];
     }

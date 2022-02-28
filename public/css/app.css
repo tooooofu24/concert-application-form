@@ -11307,3 +11307,7 @@ input.fas {
     border-radius: 0.3rem;
 }
 
+.btn-outline-success.btn-sm {
+    width: 3.8rem;
+}
+
