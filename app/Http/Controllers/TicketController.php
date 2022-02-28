@@ -19,8 +19,17 @@ class TicketController extends Controller
                 $query->orWhere('name', 'like', "%{$request->q}%")->orWhere('converted_name', 'like', "%{$request->q}%");
             });
         }
-        if ($request->is_not_entered) {
+        if ($request->enter == 1) {
             $query->where('entered_at', null);
+        }
+        if ($request->enter == 2) {
+            $query->where('entered_at', '<>', null);
+        }
+        if ($request->reserve == 1) {
+            $query->where('tel_reserved_flag', 1);
+        }
+        if ($request->reserve == 2) {
+            $query->where('tel_reserved_flag', 0);
         }
         $tickets = $query->get();
         return view('admin.tickets', compact(['tickets']));

@@ -14,7 +14,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <div class="accordion mb-3" id="accordionFlushExample">
+        <div class="accordion mb-2" id="accordionFlushExample">
             <div class="accordion-item bg-white">
                 <div class="accordion-header">
                     <button class="accordion-button collapsed bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -39,15 +39,15 @@
                                 <div class="col">
                                     <div class="row align-items-center text-center">
                                         <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_all" value="0" checked>
+                                            <input type="radio" class="btn-check" name="enter" id="enter_all" value="0" @if(request()->enter != 1 && request()->enter != 2) checked @endif>
                                             <label class="btn btn-outline-success btn-sm" for="enter_all">全て</label>
                                         </div>
                                         <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_false" value="1">
+                                            <input type="radio" class="btn-check" name="enter" id="enter_false" value="1" @if(request()->enter == 1 ) checked @endif>
                                             <label class="btn btn-outline-success btn-sm" for="enter_false">未入場</label>
                                         </div>
                                         <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_true" value="2">
+                                            <input type="radio" class="btn-check" name="enter" id="enter_true" value="2" @if(request()->enter == 2 ) checked @endif>
                                             <label class="btn btn-outline-success btn-sm" for="enter_true">入場済</label>
                                         </div>
                                     </div>
@@ -60,30 +60,51 @@
                                 <div class="col">
                                     <div class="row align-items-center text-center">
                                         <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_all" value="0" checked>
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_all" value="0" @if(request()->reserve != 1 && request()->reserve != 2) checked @endif >
                                             <label class="btn btn-outline-success btn-sm" for="reserve_all">全て</label>
                                         </div>
                                         <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_tel" value="1">
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_tel" value="1" @if(request()->reserve == 1 ) checked @endif>
                                             <label class="btn btn-outline-success btn-sm" for="reserve_tel">電話</label>
                                         </div>
                                         <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_sns" value="2">
+                                            <input type="radio" class="btn-check" name="reserve" id="reserve_sns" value="2" @if(request()->reserve == 2 ) checked @endif>
                                             <label class="btn btn-outline-success btn-sm" for="reserve_sns">SNS</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
-                            </div>
-                            <div class="text-end">
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col text-center">
+                                    <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
+                                </div>
+                                <div class="col d-flex justify-content-end align-items-end">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('tickets.index') }}"><i class="fas fa-backspace"></i></a>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mb-2">
+            @if(request()->q)
+            <span class="badge bg-secondary mx-1"><i class="fas fa-user me-2"></i>{{ request()->q }}</span>
+            @endif
+            @if(request()->enter == 1)
+            <span class="badge bg-secondary mx-1"><i class="fas fa-exclamation-triangle me-2"></i>未入場</span>
+            @elseif(request()->enter == 2)
+            <span class="badge bg-secondary mx-1"><i class="fas fa-walking fa-lg me-2"></i>入場済</span>
+            @endif
+            @if(request()->reserve == 1)
+            <span class="badge bg-secondary mx-1"><i class="fas fa-phone-alt me-2"></i>電話</span>
+            @elseif(request()->reserve == 2)
+            <span class="badge bg-secondary mx-1"><i class="fab fa-instagram me-2"></i>SNS</span>
+            @endif
+            @if(request()->q || request()->enter || request()->reserve)
+            <span class="badge bg-danger ms-1"><a class="text-white" href="{{ route('tickets.index') }}"><i class="fas fa-backspace"></i></a></span>
+            @endif
         </div>
         <div class="card">
             <div class="card-body px-1">
