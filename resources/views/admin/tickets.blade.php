@@ -6,7 +6,7 @@
 @section('title', '音楽科卒業演奏会 - 管理画面')
 
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
-<div class="container-lg pt-5 mt-3" style="max-width: 50rem;">
+<div class="container-lg pt-5 mt-2" style="max-width: 50rem;">
     <div class="py-3">
         @if(session('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -80,7 +80,6 @@
                                     <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
                                 </div>
                                 <div class="col d-flex justify-content-end align-items-center">
-                                    <!-- <button class="btn text-danger"><i class="fas fa-times fs-2"></i></button> -->
                                     <a class="btn btn-danger btn-sm" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-times"></i></a>
                                 </div>
                             </div>
@@ -95,20 +94,17 @@
             <span class="badge bg-success mx-1">全て</span>
             @endif
             @if(request()->q)
-            <span class="badge bg-success mx-1"><i class="fas fa-user me-2"></i>{{ request()->q }}</span>
+            <span class="badge bg-success mx-1">{{ request()->q }}</span>
             @endif
             @if(request()->enter == 1)
-            <span class="badge bg-success mx-1"><i class="fas fa-exclamation-triangle me-2"></i>未入場</span>
+            <span class="badge bg-success mx-1">未入場</span>
             @elseif(request()->enter == 2)
-            <span class="badge bg-success mx-1"><i class="fas fa-walking fa-lg me-2"></i>入場済</span>
+            <span class="badge bg-success mx-1">入場済</span>
             @endif
             @if(request()->reserve == 1)
-            <span class="badge bg-success mx-1"><i class="fas fa-phone-alt me-2"></i>電話</span>
+            <span class="badge bg-success mx-1">電話</span>
             @elseif(request()->reserve == 2)
-            <span class="badge bg-success mx-1"><i class="fab fa-instagram me-2"></i>SNS</span>
-            @endif
-            @if(request()->q || request()->enter || request()->reserve)
-            <span class="badge bg-danger ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><a class="text-white" href="{{ route('tickets.index') }}"><i class="fas fa-times"></i></a></span>
+            <span class="badge bg-success mx-1">SNS</span>
             @endif
         </div>
         <div class="card">
@@ -116,7 +112,14 @@
                 <div class="table-responsive mx-auto" style="max-width: 35rem;">
                     <div class="container">
                         <div class="pb-1">
-                            <span class="text-muted">来場数 {{ count($tickets->where('entered_at', '<>', null)) }} / {{ count($tickets) }}人</span>
+                            <div class="text-muted d-flex justify-content-between">
+                                <span>
+                                    検索結果 {{ $tickets->total() }}件
+                                </span>
+                                <span>
+                                    ページ {{ $tickets->currentPage() }} / {{ $tickets->lastPage() }}
+                                </span>
+                            </div>
                         </div>
                         <ul class="list-group list-group-flush">
                             @foreach($tickets as $ticket)
@@ -261,6 +264,9 @@
         </div>
     </div>
     @endforeach
+</div>
+<div class="mb-4 d-flex justify-content-center">
+    {{ $tickets->links() }}
 </div>
 
 {{-- 新規作成ボタン --}}

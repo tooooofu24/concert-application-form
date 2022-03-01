@@ -31,7 +31,7 @@ class TicketController extends Controller
         if ($request->reserve == 2) {
             $query->where('tel_reserved_flag', 0);
         }
-        $tickets = $query->get();
+        $tickets = $query->paginate(20);
         return view('admin.tickets', compact(['tickets']));
     }
 

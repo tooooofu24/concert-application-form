@@ -22,3 +22,8 @@ input.fas {
 .btn-outline-success.btn-sm {
     width: 3.8rem;
 }
+
+img.how-to-img {
+    width: 100% !important;
+    height: auto !important;
+}

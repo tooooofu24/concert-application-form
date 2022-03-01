@@ -41,8 +41,8 @@ Route::group(['as' => 'application.', 'prefix' => 'application'], function () {
 });
 
 // 管理者用画面
-Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'tickets'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
         Route::get('/', [TicketController::class, 'index'])->name('index');
         Route::post('{id}', [TicketController::class, 'enter'])->name('enter');
         Route::delete('{id}', [TicketController::class, 'destroy'])->name('destroy');
@@ -50,6 +50,14 @@ Route::group(['middleware' => 'auth', 'as' => 'tickets.', 'prefix' => 'admin'], 
         Route::post('send-email/{id}', [TicketController::class, 'sendMail'])->name('send-mail');
         Route::post('/', [TicketController::class, 'store'])->name('store');
     });
+    Route::get('how-to', function () {
+        return view('admin.how-to');
+    })->name('how-to');
+
+    Route::get('qr-code', function () {
+        return view('admin.qr-code');
+    })->name('qr-code');
+
     Route::get('email-test', function () {
         $ticket = Ticket::find(1);
         $mail = new PreviousMail($ticket);
