@@ -3,9 +3,9 @@
 @section('content')
 
 @section('description', '千葉大学音楽科卒業演奏会の管理画面です。')
-@section('title', '音楽科卒業演奏会 - 管理画面')
+@section('title', '音楽科卒業演奏会 - チケット一覧')
 
-@include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット管理画面'])
+@include('layouts.admin-navigation',['title'=>'卒業演奏会 チケット一覧'])
 <div class="container-lg pt-5 mt-2" style="max-width: 50rem;">
     <div class="py-3">
         @if(session('message'))
@@ -29,7 +29,7 @@
                                     <i class="fas fa-user fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="氏名"></i>
                                 </div>
                                 <div class="col d-flex align-items-center">
-                                    <input type="text" class="form-control bg-white" id="q" placeholder="氏名を検索（ひらがな可）" name="q" value="{{ request()->q }}">
+                                    <input type="text" class="form-control bg-white" id="q" placeholder="氏名（ひらがな可）" name="q" value="{{ request()->q }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -77,10 +77,10 @@
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col text-center">
-                                    <button class="btn btn-primary"><i class="fas fa-search me-2"></i>検索</button>
+                                    <button class="btn btn-primary rounded-pill"><i class="fas fa-search me-2"></i>検索</button>
                                 </div>
-                                <div class="col d-flex justify-content-end align-items-center">
-                                    <a class="btn btn-danger btn-sm" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-times"></i></a>
+                                <div class="col d-flex justify-content-end align-items-end">
+                                    <a class="btn btn-danger btn-sm rounded-pill" style="width: 2.2rem;" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-times"></i></a>
                                 </div>
                             </div>
                         </form>
@@ -189,7 +189,7 @@
                             @if($ticket->entered_at)
                             <span class="badge bg-secondary me-1"><i class="fas fa-walking me-1"></i>入場済</span>
                             @else
-                            <span class="badge bg-secondary me-1"><i class="fas fa-exclamation-triangle me-1"></i></i>未入場</span>
+                            <span class="badge bg-secondary me-1"><i class="fas fa-times me-1"></i>未入場</span>
                             @endif
                             @if($ticket->tel_reserved_flag)
                             <span class="badge bg-secondary"><i class="fas fa-phone-alt me-1"></i>電話受付</span>

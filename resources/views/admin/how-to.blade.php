@@ -7,10 +7,9 @@
 
 @include('layouts.admin-navigation',['title'=>'卒業演奏会 受付フロー'])
 
-<div class="h-100 d-flex align-items-center justify-content-center">
-    <div class="text-center col-lg-6 col-md-8 mx-auto">
+<div style="padding-top: 4rem;">
+    <div class="col-lg-6 col-md-8 mx-auto">
         <img class="how-to-img d-block" src="{{ asset('svg/how-to.svg') }}">
     </div>
 </div>
-
 @endsection
