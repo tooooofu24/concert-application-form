@@ -27,3 +27,7 @@ img.how-to-img {
     width: 100% !important;
     height: auto !important;
 }
+
+.nav-link i {
+    width: 2rem;
+}

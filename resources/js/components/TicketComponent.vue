@@ -176,7 +176,7 @@ export default {
     confirmEntry() {
       let start_time = new Date("2022/03/05 11:30:00");
       // 入場前は使用させない
-      if (start_time > new Date()) {
+      if (start_time > new Date() && this.uid != "sample") {
         var modal = new bootstrap.Modal(document.getElementById("pre_modal"));
       } else {
         var modal = new bootstrap.Modal(

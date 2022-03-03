@@ -5,7 +5,11 @@
 @section('description', '千葉大学音楽科卒業演奏会のチケット画面です。当日、こちらのチケットを受付でご提示ください。また、誤って使用しないようご注意ください。')
 @section('title', '音楽科卒業演奏会 - チケット画面')
 
+@if(Route::is('tickets.sample'))
+@include('layouts.admin-navigation',['title'=>'卒業演奏会 チケットサンプル'])
+@else
 @include('layouts.public-navigation')
+@endif
 <div class="h-100 d-flex align-items-center">
     <div class="container-lg pt-4">
         @if(isset($ticket))

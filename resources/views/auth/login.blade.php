@@ -18,7 +18,7 @@
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">メールアドレス</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="@if(app()->isLocal()) {{ old('email', 'test@email.com') }} @else {{ old('email') }} @endif" required autocomplete="email" autofocus @if(app()->isLocal()) readonly @endif>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -31,10 +31,10 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-end">パスワード</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" @if(app()->isLocal()) value="password" readonly @endif>
 
                                     @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class=" invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror

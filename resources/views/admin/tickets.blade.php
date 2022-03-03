@@ -23,67 +23,84 @@
                 </div>
                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <form action="">
-                            <div class="row mb-3">
-                                <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-user fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="氏名"></i>
-                                </div>
-                                <div class="col d-flex align-items-center">
-                                    <input type="text" class="form-control bg-white" id="q" placeholder="氏名（ひらがな可）" name="q" value="{{ request()->q }}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-walking fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="入場済/未入場"></i>
-                                </div>
-                                <div class="col">
-                                    <div class="row align-items-center text-center">
-                                        <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_all" value="0" @if(request()->enter != 1 && request()->enter != 2) checked @endif>
-                                            <label class="btn btn-outline-success btn-sm" for="enter_all">全て</label>
+                        <div class="mx-auto" style="max-width: 35rem;">
+                            <form action="">
+                                <div class="row mb-1">
+                                    <div class="col-2 text-center">
+                                        <div>
+                                            <i class="fas fa-user fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="氏名"></i>
                                         </div>
-                                        <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_false" value="1" @if(request()->enter == 1 ) checked @endif>
-                                            <label class="btn btn-outline-success btn-sm" for="enter_false">未入場</label>
+                                        <div>
+                                            <span class="badge text-muted p-0">氏名</span>
                                         </div>
-                                        <div class="col">
-                                            <input type="radio" class="btn-check" name="enter" id="enter_true" value="2" @if(request()->enter == 2 ) checked @endif>
-                                            <label class="btn btn-outline-success btn-sm" for="enter_true">入場済</label>
+                                    </div>
+                                    <div class="col d-flex align-items-center">
+                                        <input type="text" class="form-control bg-white" id="q" placeholder="氏名（ひらがな可）" name="q" value="{{ request()->q }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-2 text-center">
+                                        <div>
+                                            <i class="fas fa-walking fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="入場済/未入場"></i>
+                                        </div>
+                                        <div>
+                                            <span class="badge text-muted p-0">状態</span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row h-100 align-items-center">
+                                            <div class="col">
+                                                <input type="radio" class="btn-check" name="enter" id="enter_all" value="0" @if(request()->enter != 1 && request()->enter != 2) checked @endif>
+                                                <label class="btn btn-outline-success btn-sm" for="enter_all">全て</label>
+                                            </div>
+                                            <div class="col text-center">
+                                                <input type="radio" class="btn-check" name="enter" id="enter_false" value="1" @if(request()->enter == 1 ) checked @endif>
+                                                <label class="btn btn-outline-success btn-sm" for="enter_false">未入場</label>
+                                            </div>
+                                            <div class="col text-end">
+                                                <input type="radio" class="btn-check" name="enter" id="enter_true" value="2" @if(request()->enter == 2 ) checked @endif>
+                                                <label class="btn btn-outline-success btn-sm" for="enter_true">入場済</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-mobile-alt fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="申込方法"></i>
-                                </div>
-                                <div class="col">
-                                    <div class="row align-items-center text-center">
-                                        <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_all" value="0" @if(request()->reserve != 1 && request()->reserve != 2) checked @endif >
-                                            <label class="btn btn-outline-success btn-sm" for="reserve_all">全て</label>
+                                <div class="row mb-1">
+                                    <div class="col-2 text-center">
+                                        <div>
+                                            <i class="fas fa-mobile-alt fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="申込方法"></i>
                                         </div>
-                                        <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_tel" value="1" @if(request()->reserve == 1 ) checked @endif>
-                                            <label class="btn btn-outline-success btn-sm" for="reserve_tel">電話</label>
+                                        <div>
+                                            <span class="badge text-muted p-0">予約</span>
                                         </div>
-                                        <div class="col-4">
-                                            <input type="radio" class="btn-check" name="reserve" id="reserve_sns" value="2" @if(request()->reserve == 2 ) checked @endif>
-                                            <label class="btn btn-outline-success btn-sm" for="reserve_sns">SNS</label>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row h-100 align-items-center">
+                                            <div class="col">
+                                                <input type="radio" class="btn-check" name="reserve" id="reserve_all" value="0" @if(request()->reserve != 1 && request()->reserve != 2) checked @endif >
+                                                <label class="btn btn-outline-success btn-sm" for="reserve_all">全て</label>
+                                            </div>
+                                            <div class="col text-center">
+                                                <input type="radio" class="btn-check" name="reserve" id="reserve_tel" value="1" @if(request()->reserve == 1 ) checked @endif>
+                                                <label class="btn btn-outline-success btn-sm" for="reserve_tel">電話</label>
+                                            </div>
+                                            <div class="col text-end">
+                                                <input type="radio" class="btn-check" name="reserve" id="reserve_sns" value="2" @if(request()->reserve == 2 ) checked @endif>
+                                                <label class="btn btn-outline-success btn-sm" for="reserve_sns">SNS</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col text-center">
-                                    <button class="btn btn-primary rounded-pill"><i class="fas fa-search me-2"></i>検索</button>
+                                <div class="row mt-2">
+                                    <div class="col"></div>
+                                    <div class="col text-center">
+                                        <button class="btn btn-primary rounded-pill"><i class="fas fa-search me-2"></i>検索</button>
+                                    </div>
+                                    <div class="col d-flex justify-content-end align-items-end">
+                                        <a class="btn btn-danger btn-sm rounded-pill" style="width: 2.2rem;" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-times"></i></a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex justify-content-end align-items-end">
-                                    <a class="btn btn-danger btn-sm rounded-pill" style="width: 2.2rem;" href="{{ route('tickets.index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="検索条件のリセット"><i class="fas fa-times"></i></a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

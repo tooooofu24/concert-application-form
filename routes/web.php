@@ -63,11 +63,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         $mail = new PreviousMail($ticket);
         return $mail->build();
     });
+
+    // サンプルのチケット画面
+    Route::get('tickets/sample', function () {
+        return view('application.ticket');
+    })->name('tickets.sample');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// サンプルのチケット画面
-Route::get('tickets/sample', function () {
-    return view('application.ticket');
-});

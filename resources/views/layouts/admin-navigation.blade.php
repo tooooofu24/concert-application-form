@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
-        <span class="navbar-brand fs-6 fw-bold">
+        <span class="navbar-brand fs-6">
             {{ $title }}
         </span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -11,13 +11,16 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tickets.index') }}"><i class="fas fa-list me-2"></i></i></i>チケット一覧</a>
+                    <a class="nav-link @if(Route::is('tickets.index')) active @endif" href="{{ route('tickets.index') }}"><i class="fas fa-list me-2"></i>チケット一覧</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('how-to') }}"><i class="fas fa-book me-2"></i>受付フロー</a>
+                    <a class="nav-link @if(Route::is('how-to')) active @endif" href="{{ route('how-to') }}"><i class="fas fa-book me-2"></i>受付フロー</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('qr-code') }}"><i class="fas fa-qrcode me-2"></i>QRコード</a>
+                    <a class="nav-link @if(Route::is('qr-code')) active @endif" href="{{ route('qr-code') }}"><i class="fas fa-qrcode me-2"></i>QRコード</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(Route::is('tickets.sample')) active @endif" href="{{ route('tickets.sample') }}"><i class="fas fa-ticket-alt me-2"></i>チケットサンプル</a>
                 </li>
                 <!-- Authentication Links -->
                 <li class="">
