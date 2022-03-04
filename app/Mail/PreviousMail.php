@@ -32,6 +32,6 @@ class PreviousMail extends Mailable
     public function build()
     {
         $ticket = $this->ticket;
-        return $this->markdown('emails.previous', compact('ticket'))->subject('「千葉大学教育学部音楽科卒業演奏会」について♪');
+        return $this->markdown('emails.previous', compact('ticket'))->subject('「千葉大学教育学部音楽科卒業演奏会」前日のお知らせ♪');
     }
 }
