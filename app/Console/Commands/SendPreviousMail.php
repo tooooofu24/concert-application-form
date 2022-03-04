@@ -42,17 +42,18 @@ class SendPreviousMail extends Command
      */
     public function handle()
     {
-        // $tickets = Ticket::where('email', '<>', null)->get();
-        $tickets = [Ticket::find(1)];
-        foreach ($tickets as $ticket) {
+        $tickets = Ticket::where('email', '<>', null)->get();
+        foreach ($tickets as $i => $ticket) {
+            print("{$i}/{$tickets->count()}\n");
             try {
                 Mail::to($ticket->email)->send(new PreviousMail($ticket));
             } catch (Exception $e) {
-                dump($e->getMessage());
+                print($e->getMessage() . "\n");
                 Log::debug($e->getMessage());
                 Log::debug($ticket);
                 continue;
             }
+            break;
         }
         return 0;
     }
