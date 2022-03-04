@@ -27,6 +27,11 @@ class Ticket extends Model
         return !$this->name || !$this->converted_name || !$this->tel || !$this->email;
     }
 
+    public function getIsInvalidAttribute()
+    {
+        return !$this->name || !$this->tel;
+    }
+
     public static function boot()
     {
         parent::boot();

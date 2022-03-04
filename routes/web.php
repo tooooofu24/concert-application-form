@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::post('send-email/{id}', [TicketController::class, 'sendMail'])->name('send-mail');
         Route::post('/', [TicketController::class, 'store'])->name('store');
     });
+    Route::get('table', [TicketController::class, 'table'])->name('table');
     Route::get('how-to', function () {
         return view('admin.how-to');
     })->name('how-to');

@@ -74,4 +74,11 @@ class TicketController extends Controller
         $ticket->fill($request->all())->save();
         return redirect()->route('tickets.index', $request->query())->with('message', 'チケットを作成しました！');
     }
+
+    public function table()
+    {
+        $tickets = Ticket::orderByRaw('converted_name IS NULL ASC')
+            ->orderBy('converted_name', 'ASC')->get();
+        return view('admin.table', compact(['tickets']));
+    }
 }

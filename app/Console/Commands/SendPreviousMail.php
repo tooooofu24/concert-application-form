@@ -53,7 +53,6 @@ class SendPreviousMail extends Command
                 Log::debug($ticket);
                 continue;
             }
-            break;
         }
         return 0;
     }
