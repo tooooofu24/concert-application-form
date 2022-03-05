@@ -163,7 +163,7 @@
                                         @if($ticket->entered_at)
                                         <span class="badge bg-secondary my-auto p-2 position-relative me-3">
                                             入場済
-                                            @if($ticket->isEmpty)
+                                            @if($ticket->isInvalid)
                                             <span class="position-absolute top-0 start-100 translate-middle border border-white badge rounded-circle bg-danger warning-badge align-items-center d-flex">
                                                 <i class="fas fa-exclamation mx-auto"></i>
                                             </span>
@@ -172,7 +172,7 @@
                                         @else
                                         <span class="badge bg-danger my-auto p-2 position-relative me-3">
                                             未入場
-                                            @if($ticket->isEmpty)
+                                            @if($ticket->isInvalid)
                                             <span class="position-absolute top-0 start-100 translate-middle border border-white badge rounded-circle bg-danger warning-badge align-items-center d-flex">
                                                 <i class="fas fa-exclamation mx-auto"></i>
                                             </span>
@@ -282,7 +282,7 @@
     </div>
     @endforeach
 </div>
-<div class="mb-4 d-flex justify-content-center">
+<div class="d-flex justify-content-center" style="padding-bottom: 4rem;">
     {{ $tickets->onEachSide(0)->appends(request()->query())->links() }}
 </div>
 
