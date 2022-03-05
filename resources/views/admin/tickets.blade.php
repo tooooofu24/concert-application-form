@@ -283,7 +283,7 @@
     @endforeach
 </div>
 <div class="mb-4 d-flex justify-content-center">
-    {{ $tickets->links() }}
+    {{ $tickets->onEachSide(0)->appends(request()->query())->links() }}
 </div>
 
 {{-- 新規作成ボタン --}}
