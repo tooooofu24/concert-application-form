@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TicketController;
 use App\Mail\InvitationMail;
 use App\Mail\PreviousMail;
+use App\Mail\SurveyMail;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -60,8 +61,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     })->name('qr-code');
 
     Route::get('email-test', function () {
-        $ticket = Ticket::find(1);
-        $mail = new PreviousMail($ticket);
+        $mail = new SurveyMail();
         return $mail->build();
     });
 
