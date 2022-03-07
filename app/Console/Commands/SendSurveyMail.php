@@ -43,7 +43,6 @@ class SendSurveyMail extends Command
     public function handle()
     {
         $tickets = Ticket::where('email', '<>', null)->where('entered_at', '<>', null)->get();
-        $tickets = collect([Ticket::find(1)]);
         foreach ($tickets as $i => $ticket) {
             print("{$i}/{$tickets->count()}\n");
             try {
