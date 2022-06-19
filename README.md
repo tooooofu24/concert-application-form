@@ -36,7 +36,9 @@
 - Vue.js 3.x
 - [Keen Slider(JavaScriptのライブラリ)](https://keen-slider.io/)
 - Bootstrap
-- [ConoHaのVPS(Apache、MySQL)](https://www.conoha.jp/vps/?btn_id=top--mainvisual_vps-top)
+- [ConoHaのVPS](https://www.conoha.jp/vps/?btn_id=top--mainvisual_vps-top)
+- Apache
+- MySQL
 - さくらのレンタルサーバ(メールサーバ)
 - [ひらがな化API](https://labs.goo.ne.jp/api/jp/hiragana-translation/)
 
