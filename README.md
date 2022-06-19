@@ -29,7 +29,7 @@
 
 >**チケット画面のUI・UX**  
 
-[チケット画面](https://concert-application-form-sample.ms2n-xxx.com/tickets/sample)はスワイプで直感的に使用できることを目指しました。デザイン科の生徒が描いてくれたデザインを使用しています。
+[チケット画面](https://concert-application-form-sample.ms2n-xxx.com/admin/tickets/sample)はスワイプで直感的に使用できることを目指しました。デザイン科の生徒が描いてくれたデザインを使用しています。
 
 ## 🎷 使用技術
 - Laravel 8.81.0
@@ -38,6 +38,7 @@
 - Bootstrap
 - [ConoHaのVPS(Apache、MySQL)](https://www.conoha.jp/vps/?btn_id=top--mainvisual_vps-top)
 - さくらのレンタルサーバ(メールサーバ)
+- [ひらがな化API](https://labs.goo.ne.jp/api/jp/hiragana-translation/)
 
 ## 🏫 実際に運用してもらっている様子
 https://www.instagram.com/chiba_music18/
