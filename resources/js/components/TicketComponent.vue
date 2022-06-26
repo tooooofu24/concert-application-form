@@ -1,3 +1,40 @@
+<style scoped>
+.ticket {
+  background-image: linear-gradient(
+    to right,
+    #808080,
+    #808080 0.5rem,
+    transparent 0.5rem
+  );
+  background-size: 1rem 0.1rem;
+  background-position: left bottom;
+  background-repeat: repeat-x;
+}
+.ticket-footer {
+  top: 0;
+  border-radius: 0px 0px 0.3rem 0.3rem;
+}
+.animation {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 1s;
+  animation-name: arrow;
+}
+
+.bg-gray {
+  background-color: #888888;
+}
+
+@keyframes arrow {
+  0% {
+    transform: translate(0px, 0);
+  }
+  100% {
+    transform: translate(1rem, 0);
+  }
+}
+</style>
 <template>
   <div class="col-11 col-sm-9 col-md-7 col-lg-5 mx-auto">
     <div class="card rounded-3 p-0 border-0">
@@ -210,44 +247,6 @@ export default {
   },
 };
 </script>
-
-<style>
-.ticket {
-  background-image: linear-gradient(
-    to right,
-    #808080,
-    #808080 0.5rem,
-    transparent 0.5rem
-  );
-  background-size: 1rem 0.1rem;
-  background-position: left bottom;
-  background-repeat: repeat-x;
-}
-.ticket-footer {
-  top: 0;
-  border-radius: 0px 0px 0.3rem 0.3rem;
-}
-.animation {
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1s;
-  animation-name: arrow;
-}
-
-.bg-gray {
-  background-color: #888888;
-}
-
-@keyframes arrow {
-  0% {
-    transform: translate(0px, 0);
-  }
-  100% {
-    transform: translate(1rem, 0);
-  }
-}
-</style>
 
 
 
