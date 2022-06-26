@@ -13,7 +13,7 @@
 ![image](https://user-images.githubusercontent.com/64852221/154796455-4fbe663a-2d51-4c68-9116-5bed1a3d0403.png)
 - [管理者画面](https://concert-application-form-sample.ms2n-xxx.com/admin/tickets)
 ![image](https://user-images.githubusercontent.com/64852221/154796480-25643947-5fa3-40fb-b482-8a5ee72c894f.png)
-- [チケットページ(サンプル)](https://concert-application-form-sample.ms2n-xxx.com/tickets/sample)
+- [チケットページ(サンプル)](https://concert-application-form-sample.ms2n-xxx.com/admin/tickets/sample)
 ![image](https://user-images.githubusercontent.com/64852221/154796497-d33be233-25bd-4d64-9774-e8ccab197756.png)
 - [メールデザイン](https://concert-application-form-sample.ms2n-xxx.com/admin/email-test)
 ![image](https://user-images.githubusercontent.com/64852221/154796726-45d9202c-9f06-48f9-a0ee-8f621f3d2df8.png)
@@ -29,15 +29,18 @@
 
 >**チケット画面のUI・UX**  
 
-[チケット画面](https://concert-application-form-sample.ms2n-xxx.com/tickets/sample)はスワイプで直感的に使用できることを目指しました。デザイン科の生徒が描いてくれたデザインを使用しています。
+[チケット画面](https://concert-application-form-sample.ms2n-xxx.com/admin/tickets/sample)はスワイプで直感的に使用できることを目指しました。デザイン科の生徒が描いてくれたデザインを使用しています。
 
 ## 🎷 使用技術
 - Laravel 8.81.0
 - Vue.js 3.x
 - [Keen Slider(JavaScriptのライブラリ)](https://keen-slider.io/)
 - Bootstrap
-- [ConoHaのVPS(Apache、MySQL)](https://www.conoha.jp/vps/?btn_id=top--mainvisual_vps-top)
+- [ConoHaのVPS](https://www.conoha.jp/vps/?btn_id=top--mainvisual_vps-top)
+- Apache
+- MySQL
 - さくらのレンタルサーバ(メールサーバ)
+- [ひらがな化API](https://labs.goo.ne.jp/api/jp/hiragana-translation/)
 
 ## 🏫 実際に運用してもらっている様子
 https://www.instagram.com/chiba_music18/
